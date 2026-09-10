@@ -1,0 +1,18 @@
+/* warm — friendly and premium. Fraunces for headlines (a soft, characterful serif),
+   Instrument Sans for text, cream paper, espresso dark and a terracotta accent.
+   Good for client reports, proposals and hospitality or food brands. */
+
+@import url("../fonts/fraunces.css");
+@import url("../fonts/instrument-sans.css");
+
+:root {
+  --c-paper: #F7F0E6;   --c-surface: #FCF8F2;  --c-ink: #2A1D14;  --c-muted: #7A6858;  --c-line: #E4D7C6;
+  --c-dark: #2A1D14;    --c-light: #F7F0E6;
+  --c-accent: #C8553D;  --c-accent-deep: #9E3F2B;  --c-accent-soft: #F3DDD3;
+  --c-bad: #B3372B;     --c-bad-soft: #F5DEDA;
+  --c-good: #3F6B45;    --c-good-soft: #E3EDE2;
+
+  --f-display: "Fraunces", Georgia, serif;
+  --f-text: "Instrument Sans", system-ui, sans-serif;
+  --w-display: 600;
+}

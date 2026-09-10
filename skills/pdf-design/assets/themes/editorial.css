@@ -1,0 +1,18 @@
+/* editorial — the default theme. Calm and bookish: Instrument Serif for headlines (regular
+   weight only), Instrument Sans for text, warm paper and one vermilion accent.
+   To make your own theme: copy this file, change colours and fonts, keep the variable names. */
+
+@import url("../fonts/instrument-serif.css");
+@import url("../fonts/instrument-sans.css");
+
+:root {
+  --c-dark: #161514;    --c-light: #F4F1EA;  --c-paper: #F4F1EA;  --c-surface: #FBFAF6;
+  --c-ink: #161514;     --c-muted: #6A655D;  --c-line: #DCD6CA;
+  --c-accent: #E4572E;  --c-accent-deep: #B63F1C;  --c-accent-soft: #F9E3D9;
+  --c-bad: #B83A2B;     --c-bad-soft: #F6E1DC;
+  --c-good: #2E6A4E;    --c-good-soft: #E2EEE6;
+
+  --f-display: "Instrument Serif", Georgia, serif;
+  --f-text: "Instrument Sans", system-ui, sans-serif;
+  --w-display: 400;   /* Instrument Serif has no bold: never fake one */
+}

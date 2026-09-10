@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Northwind Coffee – Q3 2026 Report</title>
+<!-- "BEFORE": the kind of HTML an AI writes when you ask it for "a nice PDF report", printed the
+     usual way (Chrome's print-to-PDF). Same content as ../report-a4.html. Kept here for comparison.
+     Printed with:  chrome --headless --no-pdf-header-footer --print-to-pdf=report-web-style.pdf report-web-style.html -->
+<style>
+  @page { size: A4; margin: 15mm; }
+  body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; color: #1f2937; line-height: 1.6; margin: 0; font-size: 14px; }
+  .hero { background: linear-gradient(135deg, #2A1D14, #5a3a26); color: #fff; padding: 40px; border-radius: 12px; margin-bottom: 28px; }
+  .hero .kicker { font-size: 12px; letter-spacing: 2px; opacity: .7; margin: 0 0 12px; }
+  .hero h1 { font-size: 30px; line-height: 1.2; margin: 0 0 12px; }
+  .hero p { margin: 0 0 8px; opacity: .85; }
+  h2 { color: #9E3F2B; border-bottom: 2px solid #eee; padding-bottom: 6px; margin-top: 32px; }
+  .cards { display: flex; gap: 16px; margin: 16px 0; }
+  .card { flex: 1; background: #fff7ed; border-radius: 10px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+  .card .n { font-size: 28px; font-weight: 700; color: #9E3F2B; }
+  .box { border-radius: 8px; padding: 12px 16px; margin: 12px 0; }
+  .bad { background: #fef2f2; border: 1px solid #fecaca; }
+  .good { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+  th { background: #f9fafb; }
+  .section { page-break-inside: avoid; }
+  .pb { page-break-before: always; }
+  footer { margin-top: 40px; color: #6b7280; font-size: 12px; border-top: 1px solid #eee; padding-top: 12px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <p class="kicker">QUARTERLY REPORT · OCTOBER 2026</p>
+    <h1>Online orders are up. Your website is the bottleneck.</h1>
+    <p>What changed this quarter, what is costing you orders, and the five fixes we recommend before the holidays.</p>
+    <p><strong>Prepared for Northwind Coffee Co.</strong> · Studio Example · hello@studio.example</p>
+  </div>
+
+  <div class="section">
+    <h2>1. Summary</h2>
+    <p>Orders grew because people want your coffee, not because the website helps them buy it.</p>
+    <div class="cards">
+      <div class="card"><div class="n">+38%</div>online orders compared with Q2, driven by Instagram and Google Maps.</div>
+      <div class="card"><div class="n">4.1 s</div>to load the menu on a phone. Customers expect less than 2.5 s.</div>
+      <div class="card"><div class="n">62%</div>of phone visitors leave on the menu page without ordering.</div>
+    </div>
+    <div class="box bad"><strong>⚠️ What is holding you back:</strong> The menu is a 9 MB PDF. On a phone it loads slowly, cannot be searched and has no order button.</div>
+    <div class="box good"><strong>✅ What is working:</strong> Instagram brings 41% of new customers, and regulars order 2.3 times a month.</div>
+  </div>
+
+  <div class="section pb">
+    <h2>2. Where orders come from</h2>
+    <p>Orders by channel, July to September 2026.</p>
+    <table>
+      <tr><th>Channel</th><th>Orders</th><th>Share</th><th>vs Q2</th><th>Note</th></tr>
+      <tr><td>Instagram → website</td><td>1,240</td><td>41%</td><td>+64%</td><td>Most new customers start here, then hit the menu page.</td></tr>
+      <tr><td>Google Maps</td><td>780</td><td>26%</td><td>+22%</td><td>People searching “coffee near me”. Reviews average 4.7.</td></tr>
+      <tr><td>QR code in the café</td><td>510</td><td>17%</td><td>+9%</td><td>Table cards. Works well at lunchtime.</td></tr>
+      <tr><td>Delivery apps</td><td>330</td><td>11%</td><td>-12%</td><td>30% commission. Falling since the price change.</td></tr>
+      <tr><td>Newsletter</td><td>150</td><td>5%</td><td>+3%</td><td>Small list of 1,900 people, but the highest order value.</td></tr>
+    </table>
+    <p><strong>What this means:</strong> Every channel ends on the same menu page, so that page decides how many visits become orders. Fix the menu first, keep Instagram weekly, and move app customers to direct orders with a 10% code.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. The problem</h2>
+    <h3>The menu page</h3>
+    <p>The menu is a scanned PDF from 2023. It takes 4.1 seconds to open on 4G, the text is too small to read without zooming, and three prices are out of date. There is no order button on it.</p>
+    <h3>Checkout on a phone</h3>
+    <p>Ordering a flat white takes seven taps and two page loads. For a small menu, three is normal. Payment only accepts cards typed by hand.</p>
+    <div class="box bad"><strong>💡 The rule for next quarter:</strong> Every tap between “I want a coffee” and “paid” costs you orders.</div>
+  </div>
+
+  <div class="section pb">
+    <h2>4. The plan</h2>
+    <ol>
+      <li><strong>Replace the PDF menu with a real menu page (week 1).</strong> Searchable, readable on a phone, with an order button on every item.</li>
+      <li><strong>Cut checkout to three taps (week 2).</strong> Add Apple Pay and Google Pay.</li>
+      <li><strong>Load in under 2 seconds (week 2).</strong> Compress the photos and remove the unused booking plugin.</li>
+      <li><strong>Add a 10% direct-order code (week 3).</strong> Printed on delivery-app bags.</li>
+      <li><strong>Measure and report (week 6).</strong> Compared with this report.</li>
+    </ol>
+    <div class="box good"><strong>✅ Nothing goes offline:</strong> The current site stays live while we build.</div>
+  </div>
+
+  <div class="section">
+    <h2>5. What we need from you</h2>
+    <ul>
+      <li>Menu, prices and 12 photos.</li>
+      <li>Access to your payment provider.</li>
+    </ul>
+  </div>
+
+  <div class="section pb">
+    <h2>Next steps</h2>
+    <p>Let’s fix the menu before the holidays. Reply to this report or call us. We can start on Monday.</p>
+    <p>New menu page and faster site live: <strong>Nov 3</strong>. Three-tap checkout live: <strong>Nov 24</strong>.</p>
+  </div>
+
+  <footer>Studio Example · studio.example · +1 555 0100 · hello@studio.example</footer>
+</body>
+</html>

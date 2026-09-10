@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>pdf-design · before and after</title>
+<!-- The comparison image for the README, made with the skill itself.
+     Page images: pdftoppm -png -r 72 -f 1 -l 3 <pdf> img/<before|after>
+     Print:  node ../skills/pdf-design/scripts/print.mjs before-after.html --scale=2
+     Then copy before-after-review/sheet-01.png to img/before-after.png -->
+<style>
+  .side { display: flex; flex-direction: column; gap: 5mm; }
+  .thumbs { display: flex; gap: 5mm; }
+  .thumbs img { display: block; height: 88mm; width: auto; border-radius: 1mm; box-shadow: 0 2mm 6mm rgba(0, 0, 0, .55); }
+  .thumbs--before img { outline: .3mm solid #3a3d42; }
+  .bad { color: var(--c-bad); }
+</style>
+</head>
+<body class="format-16-9" data-theme="dark">
+<section class="sheet" style="--safe:14mm">
+  <div class="content" style="gap:9mm">
+    <h1 class="display" style="font-size:44pt">Same content. Same AI. <span class="accent">One skill.</span></h1>
+    <div class="grid grow" style="column-gap:12mm">
+      <div class="span-6 side">
+        <div class="eyebrow bad">Before · a typical AI PDF</div>
+        <div class="thumbs thumbs--before">
+          <img src="img/before-1.png" alt="">
+          <img src="img/before-2.png" alt="">
+        </div>
+        <p class="muted">White frame, floating cover, half-empty pages.</p>
+      </div>
+      <div class="span-6 side">
+        <div class="eyebrow">After · pdf-design</div>
+        <div class="thumbs">
+          <img src="img/after-1.png" alt="">
+          <img src="img/after-2.png" alt="">
+        </div>
+        <p class="muted">Every page designed, full-bleed, real text.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">github.com/Georgi45/pdf-design</span><span class="muted">Free · MIT</span></footer>
+</section>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Northwind Coffee · Website proposal</title>
+<!-- Example for the pdf-design skill: 16:9 deck, "dark" theme. All data is invented.
+     Print:  node ../skills/pdf-design/scripts/print.mjs deck-16-9.html -->
+<style>
+  .brand { font-family: var(--f-display); font-weight: 700; font-size: 16pt; letter-spacing: -.03em; }
+  .contents { list-style: none; margin: 0; padding: 0; counter-reset: c; }
+  .contents li {
+    counter-increment: c; display: grid; grid-template-columns: 22mm 1fr auto;
+    align-items: baseline; gap: 6mm; padding: 4.5mm 0; border-top: .25mm solid var(--c-line);
+  }
+  .contents li:last-child { border-bottom: .25mm solid var(--c-line); }
+  .contents li::before { content: counter(c, decimal-leading-zero); font-family: var(--f-display); font-weight: 700; font-size: 28pt; line-height: 1; color: var(--c-accent); }
+  .contents .t { font-family: var(--f-display); font-weight: 600; font-size: 24pt; line-height: 1.1; letter-spacing: -.03em; }
+  .contents .p { color: var(--c-muted); font-size: var(--t-small); letter-spacing: .12em; text-transform: uppercase; }
+</style>
+</head>
+<body class="format-16-9" data-theme="dark">
+
+<!-- 1 · COVER -->
+<section class="sheet sheet--dark" data-airy>
+  <div class="glow" data-deco style="width:260mm;right:-90mm;top:-120mm"></div>
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="muted">Proposal · October 2026</span>
+  </header>
+  <div class="content content--bottom">
+    <div class="eyebrow">Website proposal for Northwind Coffee</div>
+    <h1 class="display" style="font-size:88pt;line-height:.95">A website that<br>sells <span class="accent">on its own.</span></h1>
+    <p class="lead muted" style="max-width:190mm">What to change on the current site, what it costs, and how many weeks until it is live.</p>
+  </div>
+  <footer class="foot"><span class="muted">Example document for the pdf-design skill · invented data</span><span class="folio muted"></span></footer>
+</section>
+
+<!-- 2 · CONTENTS -->
+<section class="sheet">
+  <div class="content">
+    <div class="grid grow">
+      <div class="span-4">
+        <div class="eyebrow">Contents</div>
+        <h2 class="display" style="margin-top:6mm">Inside</h2>
+      </div>
+      <ol class="contents span-8 to-bottom">
+        <li><span class="t">Where you are today</span><span class="p">Sheet 03</span></li>
+        <li><span class="t">Three possible paths</span><span class="p">Sheet 05</span></li>
+        <li><span class="t">The plan, week by week</span><span class="p">Sheet 06</span></li>
+        <li><span class="t">Next step</span><span class="p">Sheet 08</span></li>
+      </ol>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 3 · DIVIDER -->
+<section class="sheet sheet--accent" data-airy>
+  <div class="bg-number" data-deco style="opacity:.12;font-size:430pt;top:-40mm;bottom:auto;right:-6mm">01</div>
+  <div class="content content--bottom">
+    <div class="eyebrow" style="color:var(--c-dark)">Part 01</div>
+    <h2 class="display" style="font-size:84pt">Where you are today</h2>
+  </div>
+  <footer class="foot"><span>Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 4 · NUMBERS -->
+<section class="sheet">
+  <header class="head"><span class="eyebrow">01 · Diagnosis</span><span class="muted">Invented data</span></header>
+  <div class="content content--spread">
+    <h2 class="display" style="max-width:270mm">Three numbers explain why the website brings no orders</h2>
+    <div class="grid">
+      <div class="span-4 stat"><span class="number">4.1 s</span><span class="caption">to load on a phone. The target is under 2.5 s.</span></div>
+      <div class="span-4 stat"><span class="number">71 %</span><span class="caption">of visits come from phones, where the site looks worst.</span></div>
+      <div class="span-4 stat"><span class="number accent">0</span><span class="caption">order buttons. Today customers can only call.</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 5 · COMPARISON -->
+<section class="sheet">
+  <header class="head"><span class="eyebrow">02 · Options</span><span class="muted">Prices include tax</span></header>
+  <div class="content content--spread">
+    <h2 class="display">Three paths, one recommended</h2>
+    <table class="table">
+      <tr><th style="width:66mm">Option</th><th style="width:36mm">Price</th><th style="width:36mm">Time</th><th style="width:42mm">Online orders</th><th>Best for</th></tr>
+      <tr class="highlight"><td><b>Custom website</b></td><td class="tabular">$2,400</td><td>4 weeks</td><td><span class="chip chip--good">Yes</span></td><td>A business that wants to sell online. <b>Recommended</b></td></tr>
+      <tr><td>Adapted template</td><td class="tabular">$1,100</td><td>2 weeks</td><td><span class="chip chip--good">Yes</span></td><td>Tight budget, less distinctive design</td></tr>
+      <tr class="dim"><td>Fix the current site</td><td class="tabular">$500</td><td>1 week</td><td><span class="chip chip--bad">No</span></td><td>Faster pages; nothing else changes</td></tr>
+    </table>
+    <p class="muted" style="max-width:230mm">All prices include domain and hosting for the first year. Maintenance is separate: $50 a month.</p>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 6 · PLAN -->
+<section class="sheet">
+  <header class="head"><span class="eyebrow">03 · Plan</span><span class="muted">Week by week</span></header>
+  <div class="content content--spread">
+    <h2 class="display" style="max-width:270mm">Four weeks from idea to a live website</h2>
+    <ol class="steps steps--row" style="font-size:var(--t-lead)">
+      <li><div><span class="step-title">Week 1 · Content</span><span class="step-text">Photos, menu and prices. One one-hour meeting.</span></div></li>
+      <li><div><span class="step-title">Week 2 · Design</span><span class="step-text">Two visual directions. You pick one and we refine it together.</span></div></li>
+      <li><div><span class="step-title">Week 3 · Build</span><span class="step-text">Fast on phones, with ordering and payments.</span></div></li>
+      <li><div><span class="step-title">Week 4 · Launch</span><span class="step-text">Real-world tests, Google profile and launch.</span></div></li>
+    </ol>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 7 · QUOTE -->
+<section class="sheet sheet--soft" data-airy>
+  <div class="content content--center" style="max-width:260mm">
+    <blockquote class="quote">A beautiful website that brings no customers is an expensive brochure.</blockquote>
+    <p class="muted">Studio Example, working principle</p>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Proposal for Northwind Coffee</span><span class="folio"></span></footer>
+</section>
+
+<!-- 8 · CLOSING -->
+<section class="sheet sheet--dark" data-airy>
+  <div class="glow" data-deco style="width:240mm;top:auto;bottom:-130mm;right:auto;left:-80mm"></div>
+  <div class="content content--center">
+    <div class="eyebrow">Next step</div>
+    <h2 class="display" style="font-size:84pt">Shall we start <span class="accent">on Monday?</span></h2>
+    <p class="lead muted" style="max-width:200mm">With a one-hour meeting we have everything we need to start week 1.</p>
+  </div>
+  <hr class="hairline">
+  <footer class="foot" style="font-size:var(--t-text)"><span class="brand">Studio Example</span><span class="muted">hello@studio.example · +1 555 0100</span></footer>
+</section>
+
+</body>
+</html>

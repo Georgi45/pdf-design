@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Northwind Coffee · Q3 2026 report</title>
+<!-- Example for the pdf-design skill: A4 report, "warm" theme. All data is invented.
+     Print:  node ../skills/pdf-design/scripts/print.mjs report-a4.html -->
+<style>
+  .brand { font-family: var(--f-display); font-size: 13pt; font-weight: 600; letter-spacing: -.01em; }
+  .for { font-family: var(--f-display); font-style: italic; font-size: 12pt; color: var(--c-accent); }
+  .titlebox { display: flex; flex-direction: column; gap: 5mm; }
+  .band { padding: 10mm 11mm; display: flex; flex-direction: column; gap: 4mm; }
+  .band .line { font-family: var(--f-display); font-weight: var(--w-display); font-size: 26pt; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance; }
+  .ask { border-top: .6mm solid var(--c-accent); padding-top: 4mm; }
+  .ask h3 { margin-bottom: 1.5mm; }
+  .risk { color: var(--c-bad); }
+</style>
+</head>
+<body class="format-a4" data-theme="warm">
+
+<!-- 1 · COVER -->
+<section class="sheet sheet--dark" data-airy>
+  <div class="glow" data-deco></div>
+  <div class="bg-number accent" data-deco style="opacity:.08;font-size:300pt;top:-12mm;bottom:auto;right:-16mm">Q3</div>
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="for">for Northwind Coffee</span>
+  </header>
+  <div class="content content--bottom" style="gap:8mm;padding-bottom:10mm">
+    <div class="eyebrow">Quarterly report · October 2026</div>
+    <h1 class="display" style="font-size:46pt">Online orders are up.<br><span class="accent">Your website is the bottleneck.</span></h1>
+    <p class="lead muted measure">What changed this quarter, what is costing you orders, and the five fixes we recommend before the holidays.</p>
+  </div>
+  <hr class="hairline">
+  <footer class="foot" style="font-size:8.5pt;line-height:1.7">
+    <div><span class="muted">Prepared for</span><br><b style="font-size:10.5pt">Northwind Coffee Co.</b><br><span class="muted">Attn. Maya Chen, owner</span></div>
+    <div style="text-align:right"><b>studio.example</b><br><span class="accent">+1 555 0100</span><br>hello@studio.example</div>
+  </footer>
+</section>
+
+<!-- 2 · SUMMARY -->
+<section class="sheet">
+  <header class="head"><span class="brand">Studio Example</span><span class="muted">Northwind Coffee · Q3 2026 report</span></header>
+  <div class="content content--spread">
+    <div class="titlebox">
+      <div class="eyebrow">01 · Summary</div>
+      <h2 class="display">Three numbers explain the quarter</h2>
+      <p class="lead measure">Orders grew because people want your coffee, not because the website helps them buy it.</p>
+    </div>
+    <div class="grid" style="--t-number:62pt;--t-text:11pt">
+      <div class="span-4 stat">
+        <span class="number">+38 %</span>
+        <span class="caption">online orders compared with Q2, driven by Instagram and Google Maps.</span>
+      </div>
+      <div class="span-4 stat" style="border-color:var(--c-bad)">
+        <span class="number">4.1 s</span>
+        <span class="caption">to load the menu on a phone. Customers expect less than 2.5 s.</span>
+      </div>
+      <div class="span-4 stat" style="border-color:var(--c-bad)">
+        <span class="number">62 %</span>
+        <span class="caption">of phone visitors leave on the menu page without ordering.</span>
+      </div>
+    </div>
+    <div class="grid grid--stretch">
+      <div class="span-6 callout callout--bad">
+        <span class="callout-title">What is holding you back</span>
+        <p>The menu is a <b>9 MB PDF</b>. On a phone it loads slowly, cannot be searched and has <b>no order button</b>.</p>
+      </div>
+      <div class="span-6 callout callout--good">
+        <span class="callout-title">What is working</span>
+        <p>Instagram brings <b>41 % of new customers</b>, and regulars order <b>2.3 times a month</b>.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Report for Northwind Coffee Co.</span><span class="folio"></span></footer>
+</section>
+
+<!-- 3 · CHANNELS -->
+<section class="sheet">
+  <header class="head"><span class="brand">Studio Example</span><span class="muted">Northwind Coffee · Q3 2026 report</span></header>
+  <div class="content content--spread">
+    <div class="titlebox">
+      <div class="eyebrow">02 · Where orders come from</div>
+      <h2 class="display">Instagram brings the people. The website loses them.</h2>
+      <p class="measure">Orders by channel, July to September 2026.</p>
+    </div>
+    <table class="table">
+      <tr><th style="width:40mm">Channel</th><th style="width:20mm">Orders</th><th style="width:18mm">Share</th><th style="width:22mm">vs Q2</th><th>Note</th></tr>
+      <tr class="highlight"><td><b>Instagram to website</b></td><td class="tabular">1,240</td><td class="tabular">41 %</td><td><span class="chip chip--good">+64 %</span></td><td>Most new customers start here, then hit the menu page.</td></tr>
+      <tr><td>Google Maps</td><td class="tabular">780</td><td class="tabular">26 %</td><td><span class="chip chip--good">+22 %</span></td><td>People searching “coffee near me”. Reviews average 4.7.</td></tr>
+      <tr><td>QR code in the café</td><td class="tabular">510</td><td class="tabular">17 %</td><td><span class="chip">+9 %</span></td><td>Table cards. Works well at lunchtime.</td></tr>
+      <tr class="dim"><td>Delivery apps</td><td class="tabular">330</td><td class="tabular">11 %</td><td><span class="chip chip--bad">–12 %</span></td><td>30 % commission. Falling since the price change.</td></tr>
+      <tr class="dim"><td>Newsletter</td><td class="tabular">150</td><td class="tabular">5 %</td><td><span class="chip">+3 %</span></td><td>Small list of 1,900 people, but the highest order value.</td></tr>
+    </table>
+    <div>
+      <p style="margin-bottom:5mm"><b>What this means.</b> Every channel ends on the same menu page, so that page decides how many visits become orders.</p>
+      <div class="grid">
+        <div class="span-4 ask"><h3>Fix the menu first</h3><p class="muted">It sits between every channel and every order.</p></div>
+        <div class="span-4 ask"><h3>Keep Instagram weekly</h3><p class="muted">Your best channel, and it costs nothing but time.</p></div>
+        <div class="span-4 ask"><h3>Leave the apps alone</h3><p class="muted">Move app customers to direct orders with a 10 % code.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Report for Northwind Coffee Co.</span><span class="folio"></span></footer>
+</section>
+
+<!-- 4 · THE PROBLEM -->
+<section class="sheet">
+  <header class="head"><span class="brand">Studio Example</span><span class="muted">Northwind Coffee · Q3 2026 report</span></header>
+  <div class="content content--spread">
+    <div class="titlebox">
+      <div class="eyebrow">03 · The problem</div>
+      <h2 class="display">Two problems, one cause</h2>
+    </div>
+    <div class="grid" style="font-size:10.5pt">
+      <div class="span-6">
+        <div class="stat" style="margin-bottom:5mm"><span class="eyebrow eyebrow--plain">The menu page</span></div>
+        <h3 style="font-size:16pt;margin-bottom:3mm">A 9 MB PDF nobody can use on a phone</h3>
+        <p>The menu is a scanned PDF from 2023. It takes 4.1 seconds to open on 4G, the text is too small to read without zooming, and three prices are out of date.</p>
+        <p>There is no order button on it. A customer who has decided has to go back, find the order page and search again.</p>
+      </div>
+      <div class="span-6">
+        <div class="stat" style="margin-bottom:5mm"><span class="eyebrow eyebrow--plain">Checkout on a phone</span></div>
+        <h3 style="font-size:16pt;margin-bottom:3mm">Seven taps between hungry and paid</h3>
+        <p>Ordering a flat white takes seven taps and two page loads. For a small menu, three is normal.</p>
+        <p>Payment only accepts cards typed by hand. Apple Pay and Google Pay would remove two of the seven taps.</p>
+      </div>
+    </div>
+    <div class="band dark">
+      <span class="eyebrow">The rule for next quarter</span>
+      <p class="line">Every tap between “I want a coffee” and “paid” <span class="accent">costs you orders.</span></p>
+      <p class="muted">Fix the path from menu to payment before adding anything new to the website.</p>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Report for Northwind Coffee Co.</span><span class="folio"></span></footer>
+</section>
+
+<!-- 5 · THE PLAN -->
+<section class="sheet">
+  <header class="head"><span class="brand">Studio Example</span><span class="muted">Northwind Coffee · Q3 2026 report</span></header>
+  <div class="content content--spread">
+    <div class="titlebox">
+      <div class="eyebrow">04 · The plan</div>
+      <h2 class="display">Five fixes before the holidays</h2>
+    </div>
+    <ol class="steps">
+      <li><div><span class="step-title">Replace the PDF menu with a real menu page — week 1</span><span class="step-text">Searchable, readable on a phone, with photos and an order button on every item.</span></div></li>
+      <li><div><span class="step-title">Cut checkout to three taps — week 2</span><span class="step-text">Add Apple Pay and Google Pay, and remember returning customers.</span></div></li>
+      <li><div><span class="step-title">Load in under 2 seconds — week 2</span><span class="step-text">Compress the photos and remove the unused booking plugin.</span></div></li>
+      <li><div><span class="step-title">Add a 10 % direct-order code — week 3</span><span class="step-text">Printed on delivery-app bags, to move app customers to your own site.</span></div></li>
+      <li><div><span class="step-title">Measure and report — week 6</span><span class="step-text">Orders, menu-page drop-off and load time, compared with this report.</span></div></li>
+    </ol>
+    <div class="callout callout--good">
+      <span class="callout-title">Nothing goes offline</span>
+      <p>The current site stays live while we build. Each change ships on its own and can be undone.</p>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom:4mm">05 · What we need from you</div>
+      <div class="grid">
+        <div class="span-6 ask"><h3>Menu, prices and 12 photos</h3><p class="muted">A current list of drinks and food. We shoot the photos on a Tuesday morning.</p></div>
+        <div class="span-6 ask"><h3>Access to your payment provider</h3><p class="muted">To switch on Apple Pay and Google Pay. Ten minutes on a call.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span class="muted">Studio Example · Report for Northwind Coffee Co.</span><span class="folio"></span></footer>
+</section>
+
+<!-- 6 · CLOSING -->
+<section class="sheet sheet--dark" data-airy>
+  <div class="glow" data-deco style="top:auto;bottom:-80mm;right:auto;left:-60mm"></div>
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="for">for Northwind Coffee</span>
+  </header>
+  <div class="content content--center" style="gap:10mm">
+    <h2 class="display" style="font-size:44pt">Let’s fix the menu <span class="accent">before the holidays.</span></h2>
+    <p class="lead muted measure">Reply to this report or call us. We can start on Monday.</p>
+    <div class="grid" style="margin-top:6mm">
+      <div class="span-6 stat"><span class="number accent" style="font-size:40pt">Nov 3</span><span class="caption">New menu page and faster site live.</span></div>
+      <div class="span-6 stat"><span class="number accent" style="font-size:40pt">Nov 24</span><span class="caption">Three-tap checkout live, before the holiday rush.</span></div>
+    </div>
+  </div>
+  <hr class="hairline">
+  <footer class="foot" style="font-size:9pt;line-height:1.7">
+    <span class="brand" style="font-size:20pt">Studio Example</span>
+    <div style="text-align:right"><b>studio.example</b><br><span class="accent">+1 555 0100</span><br>hello@studio.example</div>
+  </footer>
+</section>
+
+</body>
+</html>

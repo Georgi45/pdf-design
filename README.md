@@ -1,0 +1,100 @@
+# pdf-design
+
+**Your AI makes PDFs that look like printed websites. This skill fixes it.**
+
+![The same report as a typical AI PDF and with pdf-design](examples/img/before-after.png)
+
+Ask Claude — or any AI agent — for "a nice PDF report" and you usually get a web page sent to the printer: a white frame around every page, a dark cover floating in the middle of an A4, pages that stop halfway. **pdf-design** teaches your agent to lay out documents the way a designer does, one sheet at a time, and to check its own work before handing the PDF over.
+
+*Leer en español: [README.es.md](README.es.md)*
+
+- **Every page designed as a whole.** Full-bleed backgrounds, covers, dividers and closing pages. A4, A4 landscape or 16:9.
+- **Real text.** Vector and selectable, fonts embedded. No screenshots glued into a PDF.
+- **It reviews itself.** A print script measures every page — content cut off, text over the footer, half-empty pages, missing fonts — and renders a PNG of each sheet for the agent to look at before delivering.
+- **Themes.** `editorial`, `warm` and `dark` built in. Your brand is one small CSS file.
+- **Nothing to build.** No npm install. Node 22+ and the Chrome you already have.
+
+## See it
+
+- [A4 client report, `warm` theme (PDF)](examples/report-a4.pdf) · [source](examples/report-a4.html)
+- [16:9 proposal deck, `dark` theme (PDF)](examples/deck-16-9.pdf) · [source](examples/deck-16-9.html)
+- [The "before": the same report, printed the usual way (PDF)](examples/before/report-web-style.pdf)
+
+## Install
+
+| Where | How |
+|---|---|
+| Any agent (Claude Code, Codex, Cursor, Gemini CLI, Copilot…) | `npx skills add Georgi45/pdf-design` |
+| Claude Code, as a plugin | `/plugin marketplace add https://github.com/Georgi45/pdf-design` then `/plugin install pdf-design@pdf-design` |
+| claude.ai (experimental) | Download `pdf-design.zip` from [Releases](https://github.com/Georgi45/pdf-design/releases) → Customize → Skills → Upload. Code execution must be on. |
+| By hand | Copy `skills/pdf-design/` into your agent's skills folder, for example `~/.claude/skills/`. |
+
+Or paste this into your agent: *"Install the skill from github.com/Georgi45/pdf-design"*.
+
+**Requirements:** Node.js 22+ and Chrome, Chromium or Edge (or set `CHROME_PATH`).
+
+## Use it
+
+Just ask for the document:
+
+> Make a PDF report of our Q3 numbers for the client. A4, warm theme.
+
+> Turn this proposal into a 16:9 PDF deck.
+
+The agent then:
+1. Shows you a **sheet plan**: one idea and one headline per page.
+2. Builds each sheet in HTML with the skill's layouts.
+3. Prints it with `scripts/print.mjs`.
+4. Looks at every page and fixes whatever the check flags.
+5. Hands you the PDF.
+
+You can also print by hand:
+
+```
+node skills/pdf-design/scripts/print.mjs my-report.html
+```
+
+```
+PDF:     my-report.pdf  (6 pages, 467 KB, 210 × 297 mm, theme: warm)
+Fonts:   Fraunces-72pt-SemiBold, Instrument-Sans, Instrument-Sans-Bold
+Review:  my-report-review/sheet-01.png …
+[WARN]  Sheet 3: empty gap of 34 % (82 mm). Spread the content, scale it up or merge with another sheet.
+```
+
+## Why AI PDFs look like websites
+
+Browsers don't really have pages. When an agent writes HTML and prints it, Chrome adds margins, scales the content to fit and breaks the flow wherever it can. The result is a website on paper.
+
+pdf-design turns that around:
+- Each page is a fixed-size `<section class="sheet">` with its own background. Nothing flows from one page to the next.
+- `print.mjs` injects `@page` at exactly the sheet size, with zero margins and backgrounds on. It also embeds the fonts and images, because Chrome prints before web fonts finish loading.
+- Before printing it measures every sheet in print mode, then checks the PDF itself: page count, embedded fonts, fallback fonts.
+- The agent gets one PNG per sheet and has to look at them. That closes the loop that normally ends with "here is your PDF" and a broken page 4.
+
+## Your brand
+
+Copy `skills/pdf-design/assets/themes/editorial.css` next to your document, change the colours and fonts, and point to it:
+
+```html
+<body class="format-a4" data-theme="./brand.css">
+```
+
+Download any Google Font into the skill with:
+
+```
+node skills/pdf-design/scripts/fonts.mjs "Family:wght@400..700"
+```
+
+## FAQ
+
+**Why not just screenshot each page into a PDF?** Many tools do. The text stops being text: you cannot select it, search it or copy a phone number from it, and it looks soft when printed.
+
+**Does it work in claude.ai?** It needs a browser to print. Agents with a terminal (Claude Code, Codex, Cursor, Gemini CLI) work. In claude.ai it depends on whether Chromium is available in the sandbox, so treat it as experimental.
+
+**Can I edit the PDF afterwards?** Edit the HTML and print again. That is the point: the design lives in code the agent can change.
+
+## License
+
+MIT. The bundled fonts are under the SIL Open Font License (see `skills/pdf-design/assets/fonts/licenses`).
+
+Made by **Georgi** · [X](https://x.com/georgi5_) · [Instagram](https://instagram.com/georgi5_). If it saves you time, a ⭐ helps other people find it.
