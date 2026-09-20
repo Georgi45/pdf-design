@@ -1,6 +1,6 @@
 # pdf-design
 
-**Your AI makes PDFs that look like printed websites. This skill fixes it.**
+**An Agent Skill that lays out PDFs page by page: reports, proposals and decks with vector text, six built-in themes and a quality pass on every page.**
 
 ![The same report as a typical AI PDF and with pdf-design](examples/img/before-after.png)
 

@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 dist/
+
+# Working folders from the /brag video skill.
+brag-output-*/

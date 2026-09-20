@@ -1,6 +1,6 @@
 # pdf-design
 
-**Tu IA hace PDFs que parecen webs impresas. Esta skill lo arregla.**
+**Una Agent Skill que maqueta PDFs hoja por hoja: informes, propuestas y presentaciones con texto vectorial, seis temas incluidos y un control de calidad en cada página.**
 
 ![El mismo informe como PDF típico de IA y con pdf-design](examples/img/before-after.png)
 

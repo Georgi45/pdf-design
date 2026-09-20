@@ -4,8 +4,8 @@
     "name": "Georgi Zagoruyko"
   },
   "metadata": {
-    "description": "Designed, full-bleed PDFs from your AI agent: reports, proposals and decks that don't look like printed websites.",
-    "version": "1.0.0"
+    "description": "Lays out full-bleed PDFs page by page: reports, proposals and decks with vector text, six built-in themes and an automatic quality pass.",
+    "version": "1.2.0"
   },
   "plugins": [
     {
