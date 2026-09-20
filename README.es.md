@@ -11,7 +11,7 @@ Pídele a Claude, o a cualquier agente de IA, «un informe bonito en PDF» y cas
 - **Cada hoja se diseña entera.** Fondos a sangre, portadas, separadores y cierre. A4, A4 apaisado o 16:9.
 - **Texto de verdad.** Vectorial y seleccionable, con las fuentes incrustadas. Nada de capturas pegadas en un PDF.
 - **Se revisa sola.** Un script mide cada hoja (contenido cortado, texto encima del pie, hojas medio vacías, fuentes que faltan) y saca un PNG de cada una para que el agente la mire antes de entregar.
-- **Temas.** `editorial`, `warm` y `dark` incluidos. Tu marca es un archivo CSS pequeño.
+- **Temas.** Seis incluidos: `editorial`, `warm`, `dark`, `corporate`, `mono` y `press`. ¿Ya tienes marca? Apunta `brand.mjs` a tu `DESIGN.md`, a tus tokens de diseño, a un CSS o a tu web y te escribe el tema.
 - **Nada que compilar.** Sin npm install. Node 22+ y el Chrome que ya tienes.
 
 ## Ejemplos
@@ -66,13 +66,27 @@ pdf-design le da la vuelta:
 
 ## Tu marca
 
-Copia `skills/pdf-design/assets/themes/editorial.css` junto a tu documento, cambia colores y fuentes, y enlázalo:
+Vienen seis temas. Si tu empresa ya tiene un estilo, no hace falta reescribirlo a mano:
 
-```html
-<body class="format-a4" data-theme="./marca.css">
+```
+node skills/pdf-design/scripts/brand.mjs ./DESIGN.md ./tokens.json --name acme -o ./acme.css --fonts
+node skills/pdf-design/scripts/brand.mjs https://acme.com --name acme --fonts
 ```
 
-Descarga cualquier fuente de Google Fonts con:
+Lee un `DESIGN.md`, tokens de diseño DTCG, un CSS, una página HTML o una URL en vivo; saca los
+colores y las tipografías, descarga las fuentes, comprueba el contraste de cada par texto/fondo y
+escribe dos archivos: el tema y una hoja de muestra que imprimes y miras.
+
+```html
+<body class="format-a4" data-theme="./acme.css">
+```
+
+Lee lo que imprime: te dice de qué token salió cada color y qué valores tuvo que mover para que el
+texto se lea. Es un primer borrador que tú corriges, no un veredicto. Puedes auditar cualquier tema
+con `node skills/pdf-design/scripts/brand.mjs --check ./acme.css`.
+
+¿Prefieres escribirlo tú? Copia `skills/pdf-design/assets/themes/editorial.css` junto a tu documento
+y cambia los valores. Descarga cualquier fuente de Google Fonts con:
 
 ```
 node skills/pdf-design/scripts/fonts.mjs "Familia:wght@400..700"

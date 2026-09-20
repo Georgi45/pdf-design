@@ -11,7 +11,7 @@ Ask Claude — or any AI agent — for "a nice PDF report" and you usually get a
 - **Every page designed as a whole.** Full-bleed backgrounds, covers, dividers and closing pages. A4, A4 landscape or 16:9.
 - **Real text.** Vector and selectable, fonts embedded. No screenshots glued into a PDF.
 - **It reviews itself.** A print script measures every page — content cut off, text over the footer, half-empty pages, missing fonts — and renders a PNG of each sheet for the agent to look at before delivering.
-- **Themes.** `editorial`, `warm` and `dark` built in. Your brand is one small CSS file.
+- **Themes.** Six built in: `editorial`, `warm`, `dark`, `corporate`, `mono` and `press`. Already have a brand? Point `brand.mjs` at your `DESIGN.md`, your design tokens, a CSS file or your live site and it writes the theme for you.
 - **Nothing to build.** No npm install. Node 22+ and the Chrome you already have.
 
 ## See it
@@ -73,13 +73,27 @@ pdf-design turns that around:
 
 ## Your brand
 
-Copy `skills/pdf-design/assets/themes/editorial.css` next to your document, change the colours and fonts, and point to it:
+Six themes are built in. If your company already has a style, you do not have to rewrite it by hand:
 
-```html
-<body class="format-a4" data-theme="./brand.css">
+```
+node skills/pdf-design/scripts/brand.mjs ./DESIGN.md ./tokens.json --name acme -o ./acme.css --fonts
+node skills/pdf-design/scripts/brand.mjs https://acme.com --name acme --fonts
 ```
 
-Download any Google Font into the skill with:
+It reads a `DESIGN.md`, DTCG design tokens, a CSS file, an HTML page or a live URL, pulls out the
+colours and the typefaces, downloads the fonts, checks every text-on-background pair for contrast
+and writes two files: the theme, and a one-sheet preview you print and look at.
+
+```html
+<body class="format-a4" data-theme="./acme.css">
+```
+
+Read what it prints. It says which colour came from which token and which values it moved to keep
+text readable — a first draft you correct, not a verdict. Audit any theme at any time with
+`node skills/pdf-design/scripts/brand.mjs --check ./acme.css`.
+
+Prefer to write it yourself? Copy `skills/pdf-design/assets/themes/editorial.css` next to your
+document and change the values. Download any Google Font into the skill with:
 
 ```
 node skills/pdf-design/scripts/fonts.mjs "Family:wght@400..700"

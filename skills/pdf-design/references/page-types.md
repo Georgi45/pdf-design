@@ -5,6 +5,9 @@ Complete documents to copy from, in the repository's `examples/`:
 - A4 report, `warm` theme: `examples/report-a4.html`
 - 16:9 deck, `dark` theme: `examples/deck-16-9.html`
 
+Colours and fonts are not here: they live in the theme. Six are built in and any brand you
+already have can become one — see `themes.md`.
+
 ## Document skeleton
 
 ```html
