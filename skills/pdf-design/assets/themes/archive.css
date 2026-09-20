@@ -1,0 +1,105 @@
+/* archive — the museum wall. Parchment paper, one grotesque doing every job, and EVERYTHING
+   structural set in capitals with the letters pushed apart: labels, table heads, chips and the
+   headlines themselves. Headlines stack at line-height .80 into one solid block of type. Tables
+   are a visible hairline grid; concentric rings sit behind the page. Corners are square, only the
+   things you could click are rounded. Use it for studio work, strategy, culture decks and catalogues.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/archivo.css");
+
+:root {
+  --c-paper: #E5E4E0;   --c-surface: #FFFFFF;  --c-ink: #1D1D1D;  --c-muted: #63605B;  --c-line: #BFBEBE;
+  --c-dark: #1D1D1D;    --c-light: #E5E4E0;
+  /* The accent is the pink stop of the house gradient, darkened until it reads as running text. */
+  --c-accent: #C2306E;  --c-accent-deep: #A32359;  --c-accent-soft: #F1DCE5;
+  --c-bad: #9E2B1F;     --c-bad-soft: #EFDCD8;
+  --c-good: #2C5F3E;    --c-good-soft: #DDE6DE;
+
+  --f-display: "Archivo", system-ui, sans-serif;
+  --f-text: "Archivo", system-ui, sans-serif;
+  --w-display: 400;   /* one family, one weight for display. 700 is for micro-labels only. */
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 20mm;  --gap: 8mm;
+
+  --t-small: 7.5pt;     --t-text: 9.5pt;    --t-lead: 12.5pt;
+  --t-h3: 11pt;       --t-h2: 22pt;       --t-h1: 38pt;
+  --t-display: 56pt;  --t-number: 48pt;   --t-giant: 130pt;
+
+  --lh-display: .86;  --track-display: .01em;    /* capitals want to be pushed apart */
+  --lh-hero: .80;     --track-hero: .012em;      --lh-giant: .78;
+
+  --measure: 118mm;
+  --radius-card: 0;       --radius-pill: 2.6mm;     /* square blocks; only interactive shapes soften */
+  --hair: .25mm;          --rule: .25mm;            --rule-strong: .25mm;   /* one line weight, everywhere */
+  --w-text: 400;          --w-bold: 700;            --w-label: 700;
+  --track-label: .18em;   --track-th: .14em;        --track-chip: .12em;  --track-callout: .14em;
+  --stat-border: var(--hair) solid var(--c-ink);
+  --callout-edge: 0;
+  --steps-col: 16mm;
+  --quote-mark: "";
+}
+body[data-theme].format-a4-landscape { --safe: 18mm; }
+body[data-theme].format-16-9 {
+  --safe: 24mm;  --gap: 10mm;
+  --t-small: 8.5pt;    --t-text: 13pt;     --t-lead: 17pt;
+  --t-h3: 14pt;        --t-h2: 30pt;       --t-h1: 52pt;
+  --t-display: 78pt;   --t-number: 78pt;   --t-giant: 180pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* Capitals are the architecture: headlines too, not only labels. */
+body[data-theme] h1, body[data-theme] h2,
+body[data-theme] .display, body[data-theme] .giant, body[data-theme] .quote {
+  text-transform: uppercase;
+}
+
+/* The museum label: no dash, and a wide empty gap before the content starts. */
+body[data-theme] .eyebrow::before { display: none; }
+body[data-theme] .content > .eyebrow { margin-bottom: 10mm; }
+
+/* The table IS the graphic: a full hairline grid, horizontal and vertical. */
+body[data-theme] .table th { border-bottom: var(--hair) solid var(--c-ink); }
+body[data-theme] .table th + th,
+body[data-theme] .table td + td { border-left: var(--hair) solid var(--c-line); padding-left: 3.5mm; }
+body[data-theme] .table .highlight td { background: var(--c-surface); }
+
+/* Square panels on white, outlined not filled. */
+body[data-theme] .callout {
+  background: var(--c-surface);
+  border: var(--hair) solid var(--c-line);
+  padding: 6mm;
+}
+body[data-theme] .callout--bad  { background: var(--c-bad-soft);  border-color: var(--c-line); }
+body[data-theme] .callout--good { background: var(--c-good-soft); border-color: var(--c-line); }
+
+/* Grid paper inside the copy box. */
+body[data-theme] .copy-box {
+  border: var(--hair) solid var(--c-line);
+  background-color: var(--c-surface);
+  background-image:
+    linear-gradient(to right,  var(--c-line) var(--hair), transparent var(--hair)),
+    linear-gradient(to bottom, var(--c-line) var(--hair), transparent var(--hair));
+  background-size: 6mm 6mm;
+}
+
+body[data-theme] .chip { padding: 1mm 2.8mm; }
+body[data-theme] .steps > li { padding: 4.5mm 0; }
+
+/* Concentric rings: the background architecture. A pseudo-element, so the quality check
+   never measures it and .sheet clips it with overflow: hidden. */
+body[data-theme] .sheet::before {
+  content: "";
+  position: absolute; right: -125mm; bottom: -115mm;
+  width: 300mm; height: 300mm;
+  pointer-events: none;
+  background: repeating-radial-gradient(circle at 50% 50%,
+              transparent 0 16mm, currentColor 16mm calc(16mm + var(--hair)));
+  opacity: .15;
+}

@@ -1,0 +1,108 @@
+/* product — the instrument panel. A white software product page put on paper: indigo accent,
+   a blurred gradient mesh across the top of the cover cut off by a hard diagonal, 3 mm cards
+   with real (blue-tinted) shadows, tabular figures, and the shortest type scale of the six —
+   the headline is only about four times the body, so the page reads as a dense interface rather
+   than a poster. Use it for SaaS proposals, pricing, product decks and technical offers.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/geist.css");
+
+:root {
+  --c-paper: #FFFFFF;   --c-surface: #F6F9FC;  --c-ink: #0D253D;  --c-muted: #64748D;  --c-line: #E0E6EE;
+  --c-dark: #0A0B2E;    --c-light: #FFFFFF;
+  --c-accent: #533AFD;  --c-accent-deep: #4434D4;  --c-accent-soft: #EEEBFE;
+  --c-bad: #C42F57;     --c-bad-soft: #FBE7ED;
+  --c-good: #1B7A57;    --c-good-soft: #E0F1EA;
+
+  --f-display: "Geist", system-ui, sans-serif;
+  --f-text: "Geist", system-ui, sans-serif;
+  --w-display: 300;   /* light and tightly tracked: the interface voice */
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 14mm;  --gap: 5mm;          /* the densest grid of the six */
+
+  --t-small: 7.5pt;   --t-text: 10pt;     --t-lead: 13pt;
+  --t-h3: 12pt;       --t-h2: 20pt;       --t-h1: 32pt;
+  --t-display: 44pt;  --t-number: 48pt;   --t-giant: 105pt;
+
+  --lh-display: 1.14; --track-display: -.022em;
+  --lh-hero: 1.08;    --track-hero: -.028em;   --lh-giant: .9;
+
+  --measure: 112mm;
+  --radius-card: 3mm;     --radius-pill: 99px;
+  --hair: .2mm;           --rule: .3mm;             --rule-strong: .5mm;
+  --shadow-card: 0 .9mm 2.6mm rgba(0, 55, 112, .10), 0 .25mm .7mm rgba(0, 55, 112, .07);
+  --w-text: 400;          --w-bold: 600;            --w-label: 600;
+  --track-label: .08em;   --track-th: .06em;        --track-chip: .06em;  --track-callout: .08em;
+  --marker-w: 1.9mm;
+  --stat-border: 0;
+  --callout-edge: 0;
+  --steps-col: 12mm;
+
+  --wedge: var(--c-paper);   /* the colour the diagonal cut paints back over the mesh */
+}
+body[data-theme] .sheet--dark, body[data-theme] .sheet--accent { --wedge: var(--c-dark); }
+body[data-theme].format-a4-landscape { --safe: 13mm; }
+body[data-theme].format-16-9 {
+  --safe: 17mm;  --gap: 7mm;
+  --t-small: 9pt;      --t-text: 13pt;     --t-lead: 16.5pt;
+  --t-h3: 15pt;        --t-h2: 23pt;       --t-h1: 35pt;
+  --t-display: 47pt;   --t-number: 56pt;   --t-giant: 125pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* The eyebrow is marked by a dot, not a dash. */
+body[data-theme] .eyebrow::before {
+  width: var(--marker-w); height: var(--marker-w); border-radius: 50%;
+}
+
+/* Figures are separated by a rule and an indent, not by empty space. */
+body[data-theme] .stat {
+  border-top: 0;
+  border-left: var(--hair) solid var(--c-line);
+  padding: .5mm 0 .5mm 5mm;
+  gap: 2mm;
+}
+body[data-theme] .number { font-variant-numeric: tabular-nums lining-nums; }
+
+/* Cards, borders and the only real shadows in the whole skill. */
+body[data-theme] .callout {
+  background: var(--c-surface);
+  border: var(--hair) solid var(--c-line);
+  padding: 4.5mm 5mm;
+}
+body[data-theme] .callout--bad  { background: var(--c-bad-soft);  border-color: var(--c-bad); }
+body[data-theme] .callout--good { background: var(--c-good-soft); border-color: var(--c-good); }
+body[data-theme] .copy-box { border: var(--hair) solid var(--c-line); }
+
+body[data-theme] .chip { padding: .7mm 2.4mm; }
+body[data-theme] .table th { border-bottom: var(--hair) solid var(--c-line); }
+body[data-theme] .table td { padding: 2.4mm 3mm; }
+body[data-theme] .steps > li { padding: 3mm 0; }
+
+/* Gradient mesh across the top of the cover, sliced off by a hard diagonal.
+   Both are pseudo-elements: the quality check never measures them, and .sheet clips them. */
+body[data-theme] .sheet:first-of-type::before {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0; height: 40%;
+  pointer-events: none;
+  background:
+    radial-gradient(42mm 30mm at 10% 58%, #533AFD 0%, transparent 70%),
+    radial-gradient(46mm 34mm at 42% 30%, #F96BEE 0%, transparent 72%),
+    radial-gradient(40mm 30mm at 72% 62%, #EA2261 0%, transparent 70%),
+    radial-gradient(44mm 32mm at 98% 26%, #FFB347 0%, transparent 72%);
+  filter: blur(7mm);
+  opacity: .85;
+}
+body[data-theme] .sheet:first-of-type::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 21%; bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom right, transparent 49.7%, var(--wedge) 49.8%);
+}

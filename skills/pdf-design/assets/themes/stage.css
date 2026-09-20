@@ -1,0 +1,111 @@
+/* stage — the dark one that breathes. Off-black paper, warm cream ink, and a binary type scale:
+   the headline is enormous, everything else is small, and there is nothing in between. Sections
+   are announced by { curly brackets } instead of a dash and capitals. Chips are outlined and never
+   filled. Two hairlines run edge to edge, above the content and below it, framing the page.
+   Use it for launch notes, tech decks, release write-ups and anything with a stage-lit feel.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/instrument-sans.css");
+
+:root {
+  --c-paper: #0E100F;   --c-surface: #191919;  --c-ink: #FFFCE1;  --c-muted: #8E8E80;  --c-line: #42433D;
+  --c-dark: #000000;    --c-light: #FFFCE1;
+  --c-accent: #9D95FF;  --c-accent-deep: #BDB7FF;  --c-accent-soft: #1F1F3A;
+  --c-bad: #FF8709;     --c-bad-soft: #2E1B06;
+  --c-good: #0AE448;    --c-good-soft: #0F2A18;
+
+  --f-display: "Instrument Sans", system-ui, sans-serif;
+  --f-text: "Instrument Sans", system-ui, sans-serif;
+  --w-display: 700;
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 18mm;  --gap: 8mm;
+
+  --t-small: 8pt;     --t-text: 9.5pt;    --t-lead: 13pt;
+  --t-h3: 11pt;       --t-h2: 21pt;       --t-h1: 48pt;
+  --t-display: 72pt;  --t-number: 48pt;   --t-giant: 160pt;
+
+  --lh-display: .94;  --track-display: -.028em;
+  --lh-hero: .90;     --track-hero: -.034em;   --lh-giant: .8;
+
+  --measure: 126mm;
+  --radius-card: 2mm;     --radius-pill: 99px;
+  --hair: .25mm;          --rule: .25mm;            --rule-strong: .25mm;
+  --w-text: 400;          --w-bold: 700;            --w-label: 400;
+  --case-label: none;     --track-label: 0;          /* { Section name }, not SECTION NAME */
+  --track-th: .1em;       --track-chip: .06em;      --track-callout: .1em;
+  --stat-border: var(--hair) solid var(--c-line);
+  --callout-edge: 0;
+  --steps-col: 15mm;
+  --quote-mark: "";
+}
+body[data-theme].format-a4-landscape { --safe: 16mm; }
+body[data-theme].format-16-9 {
+  --safe: 20mm;  --gap: 10mm;
+  --t-small: 9.5pt;    --t-text: 12.5pt;   --t-lead: 16.5pt;
+  --t-h3: 14pt;        --t-h2: 24pt;       --t-h1: 50pt;
+  --t-display: 72pt;   --t-number: 58pt;   --t-giant: 190pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* The section marker: { curly brackets } around the label, no rule, no capitals. */
+body[data-theme] .eyebrow::before {
+  content: "{";
+  width: auto; height: auto; background: none;
+  font-size: 1.2em; line-height: 1;
+}
+body[data-theme] .eyebrow::after {
+  content: "}";
+  font-size: 1.2em; line-height: 1;
+}
+body[data-theme] .eyebrow--plain::after { display: none; }
+
+/* Controls are outlined, never filled. */
+body[data-theme] .chip {
+  background: transparent;
+  border: var(--hair) solid currentColor;
+  color: var(--c-ink);
+  padding: .9mm 3mm;
+}
+body[data-theme] .chip--good   { color: var(--c-good); }
+body[data-theme] .chip--bad    { color: var(--c-bad); }
+body[data-theme] .chip--accent { background: transparent; color: var(--c-accent); }
+
+/* Blocks are separated by a rule, never boxed. */
+body[data-theme] .callout {
+  background: transparent;
+  border: 0; border-top: var(--hair) solid var(--c-line);
+  border-radius: 0;
+  padding: 4.5mm 0 0;
+}
+body[data-theme] .callout--bad  { border-top-color: var(--c-bad); }
+body[data-theme] .callout--good { border-top-color: var(--c-good); }
+body[data-theme] .copy-box {
+  background: var(--c-surface);
+  border: 0; border-left: .8mm solid var(--c-accent);
+}
+
+body[data-theme] .table th { border-bottom: var(--hair) solid var(--c-line); }
+body[data-theme] .table .highlight td { background: var(--c-surface); }
+body[data-theme] .steps > li::before { color: var(--c-accent); font-weight: var(--w-display); }
+
+/* Two hairlines running edge to edge, framing the content. Pseudo-elements, so the quality
+   check never measures them and .sheet clips them with overflow: hidden. */
+body[data-theme] .sheet::before {
+  content: "";
+  position: absolute; left: 0; right: 0; top: calc(var(--safe) + 7mm);
+  border-top: var(--hair) solid var(--c-line);
+  pointer-events: none;
+}
+body[data-theme] .sheet::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: calc(var(--safe) + 6mm);
+  border-top: var(--hair) solid var(--c-line);
+  pointer-events: none;
+}

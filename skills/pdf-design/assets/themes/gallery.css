@@ -1,0 +1,102 @@
+/* gallery — the quiet one. A black-and-white exhibition catalogue: no colour at all, the widest
+   margins of the six, a giant headline set at weight 300 with the lines almost touching, and a
+   hard binary geometry — 0 mm corners on everything, full pills on chips, nothing in between.
+   Blocks have no chrome: a hairline rule replaces every box. Use it for portfolios, brand books,
+   studio work and anything that should feel expensive by saying less.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/plus-jakarta-sans.css");
+
+:root {
+  --c-paper: #FFFFFF;   --c-surface: #F2F2F2;  --c-ink: #000000;  --c-muted: #6D6D6D;  --c-line: #D6D6D6;
+  --c-dark: #000000;    --c-light: #FFFFFF;
+  /* The accent is graphite on purpose: this theme has no hue. Weight and position carry emphasis. */
+  --c-accent: #6D6D6D;  --c-accent-deep: #3D3D3D;  --c-accent-soft: #EDEDED;
+  --c-bad: #8C2018;     --c-bad-soft: #F1E3E1;
+  --c-good: #1F5636;    --c-good-soft: #E1E9E4;
+
+  --f-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --f-text: "Plus Jakarta Sans", system-ui, sans-serif;
+  --w-display: 300;   /* a giant whisper: never heavy above 40 pt */
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 28mm;  --gap: 9mm;          /* the widest margins of the six */
+
+  --t-small: 7.5pt;   --t-text: 9pt;      --t-lead: 12pt;
+  --t-h3: 11pt;       --t-h2: 24pt;       --t-h1: 44pt;
+  --t-display: 60pt;  --t-number: 46pt;   --t-giant: 150pt;
+
+  --lh-display: .84;  --track-display: -.025em;
+  --lh-hero: .78;     --track-hero: -.032em;   --lh-giant: .7;
+
+  --measure: 104mm;
+  --radius-card: 0;       --radius-pill: 99px;      /* 0 or a full pill. Nothing between. */
+  --hair: .2mm;           --rule: .35mm;            --rule-strong: .35mm;
+  --w-text: 400;          --w-bold: 600;            --w-label: 500;
+  --track-label: .16em;   --track-th: .14em;        --track-chip: .12em;  --track-callout: .14em;
+  --stat-border: var(--hair) solid currentColor;
+  --callout-edge: 0;
+  --steps-col: 18mm;
+  --quote-mark: "";
+}
+body[data-theme].format-a4-landscape { --safe: 24mm; }
+body[data-theme].format-16-9 {
+  --safe: 34mm;  --gap: 11mm;
+  --t-small: 8.5pt;    --t-text: 12pt;     --t-lead: 16pt;
+  --t-h3: 14pt;        --t-h2: 32pt;       --t-h1: 58pt;
+  --t-display: 82pt;   --t-number: 86pt;   --t-giant: 210pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* No dash before the eyebrow: position does the work. */
+body[data-theme] .eyebrow::before { display: none; }
+body[data-theme] .eyebrow { color: var(--c-ink); }
+body[data-theme] .sheet--dark .eyebrow, body[data-theme] .dark .eyebrow { color: var(--c-light); }
+
+/* No card chrome anywhere. A block is a rule and some air. */
+body[data-theme] .callout {
+  background: transparent;
+  border: 0; border-top: var(--rule) solid var(--c-ink);
+  padding: 4.5mm 0 0;
+}
+body[data-theme] .callout--bad  { border-top-color: var(--c-bad); }
+body[data-theme] .callout--good { border-top-color: var(--c-good); }
+body[data-theme] .copy-box {
+  background: transparent;
+  border: 0; border-top: var(--hair) solid var(--c-ink); border-bottom: var(--hair) solid var(--c-ink);
+  padding: 5mm 0;
+}
+
+/* Chips are outlined pills — the one round shape on an otherwise square page. */
+body[data-theme] .chip {
+  background: transparent;
+  border: var(--hair) solid currentColor;
+  color: var(--c-ink);
+  padding: 1mm 3mm;
+}
+body[data-theme] .chip--good   { color: var(--c-good); }
+body[data-theme] .chip--bad    { color: var(--c-bad); }
+body[data-theme] .chip--accent { background: transparent; color: var(--c-ink); }
+
+body[data-theme] .table th { border-bottom: var(--hair) solid var(--c-ink); }
+body[data-theme] .table .highlight td { background: transparent; box-shadow: inset 2mm 0 0 -1.4mm var(--c-ink); }
+body[data-theme] .steps > li::before { font-weight: 300; }
+
+/* The foot sits under a full hairline. */
+body[data-theme] .foot { border-top: var(--hair) solid var(--c-line); padding-top: 4mm; }
+
+/* Film grain: a fine dot texture over the whole sheet, well under the type. */
+body[data-theme] .sheet::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, currentColor .06mm, transparent .07mm);
+  background-size: .42mm .42mm;
+  opacity: .09;
+}

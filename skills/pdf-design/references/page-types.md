@@ -1,9 +1,9 @@
 # Sheet types
 
-Everything uses classes from `assets/base.css`; colours and fonts come from the theme.
+Everything uses classes from `assets/base.css`; colours, fonts, margins and the type scale all come from the theme.
 Complete documents to copy from, in the repository's `examples/`:
-- A4 report, `warm` theme: `examples/report-a4.html`
-- 16:9 deck, `dark` theme: `examples/deck-16-9.html`
+- A4 report, `product` theme: `examples/report-a4.html`
+- 16:9 deck, `stage` theme: `examples/deck-16-9.html`
 
 Colours and fonts are not here: they live in the theme. Six are built in and any brand you
 already have can become one — see `themes.md`.
@@ -18,7 +18,7 @@ already have can become one — see `themes.md`.
 <title>Document title</title>
 <style> /* this document's own pieces, using --c-* and --f-* */ </style>
 </head>
-<body class="format-a4" data-theme="editorial">
+<body class="format-a4" data-theme="archive">
 <!-- include: logo.svg -->          (optional: an SVG sprite with <symbol id="logo">)
 <section class="sheet">…</section>
 </body>

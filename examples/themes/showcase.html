@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Theme showcase · pdf-design</title>
+<!-- The same three pages, printed once per theme, so the six themes can be compared side by side.
+     There is deliberately NO inline style and NO <style> block here: every size, margin, rule and
+     corner you see comes from the theme. That is the point of the file.
+
+     Print one:   node ../../skills/pdf-design/scripts/print.mjs showcase.html --theme=poster
+     Print all six: see build-all.mjs next to this file. -->
+</head>
+<body class="format-a4" data-theme="poster">
+
+<!-- 1 · COVER -->
+<section class="sheet sheet--dark" data-airy>
+  <div class="glow" data-deco></div>
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="muted">for Northwind Coffee</span>
+  </header>
+  <div class="content content--bottom">
+    <div class="eyebrow">Quarterly report</div>
+    <h1 class="display">Three numbers explain the quarter</h1>
+    <p class="lead muted measure">What changed, what it is costing you, and the one fix we recommend before the holidays.</p>
+  </div>
+  <hr class="hairline">
+  <footer class="foot">
+    <span class="muted">Prepared for Northwind Coffee Co.</span>
+    <span>studio.example</span>
+  </footer>
+</section>
+
+<!-- 2 · THE NUMBERS -->
+<section class="sheet">
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="muted">Q3 summary</span>
+  </header>
+  <div class="content content--spread">
+    <div>
+      <div class="eyebrow">01 Summary</div>
+      <h2 class="display">Orders grew. The website did not.</h2>
+    </div>
+    <p class="lead measure">People want your coffee. They are buying it in spite of the menu page, not because of it.</p>
+    <div class="grid">
+      <div class="span-4 stat">
+        <span class="number">+38 %</span>
+        <span class="caption">online orders against Q2, almost all of it from Instagram and Google Maps.</span>
+      </div>
+      <div class="span-4 stat">
+        <span class="number">4.1 s</span>
+        <span class="caption">to load the menu on a phone. People expect it in under two and a half.</span>
+      </div>
+      <div class="span-4 stat">
+        <span class="number">62 %</span>
+        <span class="caption">of phone visitors leave on the menu page without ordering anything.</span>
+      </div>
+    </div>
+    <div class="grid grid--stretch">
+      <div class="span-6 callout callout--bad">
+        <span class="callout-title">What is holding you back</span>
+        <p>The menu weighs 4.1 MB. On a phone it crawls, and two out of three people give up before they reach the order button.</p>
+      </div>
+      <div class="span-6 callout callout--good">
+        <span class="callout-title">What is working</span>
+        <p>Instagram brings 41 % of new customers, and those customers come back 3.2 times a month.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="foot">
+    <span class="muted">Studio Example · Report for Northwind Coffee</span>
+    <span class="folio"></span>
+  </footer>
+</section>
+
+<!-- 3 · WHERE THE ORDERS COME FROM -->
+<section class="sheet">
+  <header class="head">
+    <span class="brand">Studio Example</span>
+    <span class="muted">Q3 summary</span>
+  </header>
+  <div class="content content--spread">
+    <div>
+      <div class="eyebrow">02 Channels</div>
+      <h2 class="display">Instagram brings them. The menu loses them.</h2>
+    </div>
+    <table class="table">
+      <tr><th>Channel</th><th>Visits</th><th>Share</th><th>Change</th><th>What it means</th></tr>
+      <tr class="highlight"><td><b>Instagram to website</b></td><td class="tabular">1,240</td><td class="tabular">41 %</td><td><span class="chip chip--good">+64 %</span></td><td>Most new customers start here, then hit the menu page.</td></tr>
+      <tr><td>Google Maps</td><td class="tabular">780</td><td class="tabular">26 %</td><td><span class="chip chip--good">+22 %</span></td><td>People searching for coffee nearby. Reviews average 4.7.</td></tr>
+      <tr><td>QR code in the shop</td><td class="tabular">510</td><td class="tabular">17 %</td><td><span class="chip">+9 %</span></td><td>Table cards. They work best at lunchtime.</td></tr>
+      <tr class="dim"><td>Delivery apps</td><td class="tabular">330</td><td class="tabular">11 %</td><td><span class="chip chip--bad">–12 %</span></td><td>Thirty per cent commission, and falling since the price change.</td></tr>
+    </table>
+    <ol class="steps">
+      <li><div><span class="step-title">Rebuild the menu page</span><span class="step-text">Compress the photos and drop the slider. Target is under two seconds on a phone.</span></div></li>
+      <li><div><span class="step-title">Put the order button first</span><span class="step-text">Above the fold, on every page, in one colour that nothing else uses.</span></div></li>
+      <li><div><span class="step-title">Measure it again in December</span><span class="step-text">Same three numbers, same report, so the comparison is honest.</span></div></li>
+    </ol>
+  </div>
+  <footer class="foot">
+    <span class="muted">Studio Example · Report for Northwind Coffee</span>
+    <span class="folio"></span>
+  </footer>
+</section>
+
+</body>
+</html>

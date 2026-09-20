@@ -8,7 +8,7 @@ What separates a laid-out document from a printed web page. Read before the shee
 - There is no "continued on the next page". If it does not fit, it becomes two sheets, each with its own headline.
 
 ## 2. Safe area
-- All text stays inside the sheet `padding` (`--safe`: 16 mm on A4, 15 mm on A4 landscape, 18 mm on 16:9).
+- All text stays inside the sheet `padding` (`--safe`). The default is 16 mm on A4, 15 mm on A4 landscape and 18 mm on 16:9, but **the theme sets it**: `product` uses 14 mm, `gallery` uses 28 mm.
 - Only these touch the edge: backgrounds, bleed photos (`.bleed-photo`), glows and background numbers. They carry `data-deco`, and the quality check ignores them.
 - A content block that bleeds on purpose carries `data-bleed`.
 
@@ -22,6 +22,10 @@ Vertical position of the content:
 A typical content sheet: eyebrow (`01 · Section`) + `display` headline with the conclusion + content.
 
 ## 4. Hierarchy: few sizes, far apart
+
+The table below is the DEFAULT scale. Every theme replaces it, and the gap between text and headline
+is part of what makes each theme recognisable: `product` runs about 4x, `poster` about 8x. Read the
+actual values in the theme file before planning how much fits.
 
 | Piece | A4 | 16:9 |
 |---|---|---|

@@ -1,0 +1,104 @@
+/* ledger — the dense one. A midnight financial broadsheet: near-black paper, a serif headline
+   that never goes bold, Inter for reading and JetBrains Mono for every label and every figure.
+   Hairlines do all the structural work, tables have alternating rows, corners are 2 mm and
+   badges are square — no pills anywhere. Use it for audits, financial reports, data reviews and
+   anything where the reader came for the numbers.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/source-serif-4.css");
+@import url("../fonts/inter.css");
+@import url("../fonts/jetbrains-mono.css");
+
+:root {
+  --c-paper: #181818;   --c-surface: #1F1F1F;  --c-ink: #EEEEEE;  --c-muted: #A4A19B;  --c-line: #343434;
+  --c-dark: #0E0E0E;    --c-light: #EEEEEE;
+  --c-accent: #2B7FFF;  --c-accent-deep: #7FB2FF;  --c-accent-soft: #132743;
+  --c-bad: #FF6B5B;     --c-bad-soft: #2B1512;
+  --c-good: #4ADE80;    --c-good-soft: #10261A;
+
+  --f-display: "Source Serif 4", Georgia, serif;
+  --f-text: "Inter", system-ui, sans-serif;
+  --w-display: 400;   /* the serif stays at book weight, at every size */
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 14mm;  --gap: 5mm;          /* dense: the page is a data surface */
+
+  --t-small: 7.5pt;   --t-text: 9pt;      --t-lead: 12pt;
+  --t-h3: 11pt;       --t-h2: 18pt;       --t-h1: 30pt;
+  --t-display: 46pt;  --t-number: 52pt;   --t-giant: 110pt;
+
+  --lh-display: 1.08; --track-display: -.025em;
+  --lh-hero: 1.02;    --track-hero: -.028em;   --lh-giant: .86;
+
+  --measure: 116mm;
+  --radius-card: 2mm;     --radius-pill: 1mm;       /* square badges, never pills */
+  --hair: .2mm;           --rule: .3mm;             --rule-strong: .4mm;
+  --w-text: 400;          --w-bold: 600;            --w-label: 500;
+  --f-label: "JetBrains Mono", ui-monospace, monospace;
+  --track-label: .1em;    --track-th: .1em;         --track-chip: .08em;  --track-callout: .1em;
+  --stat-border: var(--rule) solid var(--c-line);
+  --callout-edge: 0;
+  --steps-col: 13mm;
+}
+body[data-theme].format-a4-landscape { --safe: 13mm; }
+body[data-theme].format-16-9 {
+  --safe: 16mm;  --gap: 7mm;
+  --t-small: 8.5pt;    --t-text: 12pt;     --t-lead: 16pt;
+  --t-h3: 14pt;        --t-h2: 24pt;       --t-h1: 40pt;
+  --t-display: 62pt;   --t-number: 72pt;   --t-giant: 150pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* Every figure is monospaced and tabular — columns of numbers line up by construction. */
+body[data-theme] .number, body[data-theme] .folio, body[data-theme] .steps > li::before {
+  font-family: var(--f-label);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+body[data-theme] .steps > li::before { font-size: calc(var(--t-h2) * .8); }
+
+/* Data tables: alternating rows and a hairline under each one. */
+body[data-theme] .table tbody tr:nth-child(even) td { background: var(--c-surface); }
+body[data-theme] .table th { border-bottom: var(--rule-strong) solid var(--c-muted); }
+body[data-theme] .table td { padding: 2.2mm 3mm; }
+
+/* Callouts are panels, not tinted blocks. */
+body[data-theme] .callout {
+  background: var(--c-surface);
+  border: var(--hair) solid var(--c-line);
+  padding: 4.5mm 5mm;
+}
+body[data-theme] .callout--bad  { background: var(--c-bad-soft);  border-color: var(--c-bad); }
+body[data-theme] .callout--good { background: var(--c-good-soft); border-color: var(--c-good); }
+body[data-theme] .copy-box { border: var(--hair) solid var(--c-line); }
+
+body[data-theme] .chip { padding: .7mm 2mm; }
+body[data-theme] .stat { padding-top: 3mm; }
+
+/* A narrow instrument rail down the left edge of every sheet. Pseudo-element, so the quality
+   check never measures it and .sheet clips it with overflow: hidden. */
+body[data-theme] .sheet::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 6mm;
+  pointer-events: none;
+  background: var(--c-dark);
+  border-right: var(--hair) solid var(--c-line);
+}
+/* Tick marks along the rail. */
+body[data-theme] .sheet::after {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2.4mm;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, var(--c-line) var(--hair), transparent var(--hair));
+  background-size: 100% 6mm;
+  opacity: .9;
+}

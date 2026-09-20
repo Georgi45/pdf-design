@@ -1,0 +1,109 @@
+/* poster — the loud one. A volcanic launch poster: limestone paper that is DARKER than the
+   cards sitting on it, an ember accent, a condensed ultrabold headline that runs enormous at
+   line-height .92, 9 mm corners on every block and dotted dividers. Nothing is a hairline box.
+   Use it for launches, manifestos, one-pagers and anything that has to be seen from across a room.
+
+   A theme carries colour AND layout. Colours and fonts go in :root; margins, the type scale and
+   the component overrides go in body[data-theme], which outranks the format classes in base.css.
+   See references/themes.md. */
+
+@import url("../fonts/anton.css");
+@import url("../fonts/archivo.css");
+
+:root {
+  --c-paper: #E2E2DF;   --c-surface: #F7F6F2;  --c-ink: #070607;  --c-muted: #5C5A57;  --c-line: #C6C5C1;
+  --c-dark: #070607;    --c-light: #F7F6F2;
+  --c-accent: #E34000;  --c-accent-deep: #B33700;  --c-accent-soft: #FBDCCB;
+  --c-bad: #A32014;     --c-bad-soft: #F3D8D3;
+  --c-good: #2F6B3C;    --c-good-soft: #DCE8DC;
+
+  --f-display: "Anton", "Archivo", Impact, sans-serif;
+  --f-text: "Archivo", system-ui, sans-serif;
+  --w-display: 400;   /* Anton ships one weight. Never fake a bolder one. */
+}
+
+/* ------------------------------------------------------------ layout DNA */
+body[data-theme] {
+  --safe: 15mm;  --gap: 7mm;
+
+  --t-small: 7.5pt;   --t-text: 9.5pt;    --t-lead: 13pt;
+  --t-h3: 12pt;       --t-h2: 30pt;       --t-h1: 54pt;
+  --t-display: 76pt;  --t-number: 46pt;   --t-giant: 165pt;
+
+  --lh-display: .92;  --track-display: .012em;   /* condensed faces want POSITIVE tracking */
+  --lh-hero: .88;     --track-hero: .01em;       --lh-giant: .82;
+
+  --measure: 122mm;
+  --radius-card: 9mm;     --radius-pill: 99px;
+  --hair: .35mm;          --rule: .7mm;          --rule-strong: 1.2mm;
+  --w-text: 500;          --w-bold: 700;         --w-label: 700;
+  --track-label: .1em;    --track-th: .1em;      --track-chip: .06em;  --track-callout: .1em;
+  --stat-border: 0;
+  --callout-edge: 0;
+  --steps-col: 12mm;
+  --quote-mark: "";
+}
+body[data-theme].format-a4-landscape { --safe: 14mm; }
+body[data-theme].format-16-9 {
+  --safe: 18mm;  --gap: 9mm;
+  --t-small: 9pt;      --t-text: 13pt;     --t-lead: 17.5pt;
+  --t-h3: 15pt;        --t-h2: 40pt;       --t-h1: 72pt;
+  --t-display: 104pt;  --t-number: 86pt;   --t-giant: 230pt;
+}
+
+/* ------------------------------------------------------------ structure */
+
+/* The eyebrow is a filled pill, not a dash and a word. */
+body[data-theme] .eyebrow::before { display: none; }
+body[data-theme] .eyebrow {
+  width: fit-content;   /* the pill hugs its label; it never spans the column */
+  align-self: flex-start;
+  padding: 1.6mm 4.5mm;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent-soft);
+  color: var(--c-accent-deep);
+}
+body[data-theme] .sheet--dark .eyebrow, body[data-theme] .dark .eyebrow {
+  background: var(--c-accent); color: var(--c-light);
+}
+
+/* Every block is a big soft rectangle. The canvas is darker than what sits on it. */
+body[data-theme] .stat {
+  padding: 4mm 4.5mm 5mm;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  gap: 3.5mm;
+}
+body[data-theme] .stat .number { color: var(--c-accent-deep); }
+body[data-theme] .sheet--dark .stat, body[data-theme] .dark .stat {
+  background: color-mix(in srgb, var(--c-light) 12%, transparent);
+}
+body[data-theme] .sheet--dark .stat .number, body[data-theme] .dark .stat .number { color: var(--c-accent); }
+
+body[data-theme] .callout { padding: 6.5mm 7mm; }
+body[data-theme] .copy-box { border: 0; padding: 6.5mm 7mm; }
+
+/* Dividers are dotted, never solid. */
+body[data-theme] .hairline { border-top-style: dotted; border-top-width: .5mm; border-color: var(--c-muted); }
+body[data-theme] .steps > li { border-top-style: dotted; border-top-width: .5mm; }
+body[data-theme] .steps > li:last-child { border-bottom-style: dotted; border-bottom-width: .5mm; }
+body[data-theme] .table td { border-bottom-style: dotted; border-bottom-width: .5mm; }
+body[data-theme] .table th { border-bottom-width: var(--rule-strong); }
+
+body[data-theme] .chip { padding: 1.2mm 3.2mm; }
+body[data-theme] .list > li::before { height: .8mm; }
+
+/* Halftone dot field: the poster's only ornament. A pseudo-element, so the quality check
+   never measures it, and .sheet already clips it with overflow: hidden. */
+body[data-theme] .sheet::after {
+  content: "";
+  position: absolute; top: -18mm; right: -22mm;
+  width: 135mm; height: 135mm;
+  pointer-events: none;
+  background-image: radial-gradient(circle, currentColor 1.05mm, transparent 1.15mm);
+  background-size: 5mm 5mm;
+  opacity: .34;
+  -webkit-mask-image: radial-gradient(circle at 62% 42%, #000 6%, transparent 66%);
+          mask-image: radial-gradient(circle at 62% 42%, #000 6%, transparent 66%);
+}
+body[data-theme] .sheet--dark::after, body[data-theme] .sheet--accent::after { opacity: .45; }

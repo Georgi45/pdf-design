@@ -19,6 +19,25 @@
   --t-h3: 12pt;      --t-h2: 19pt;      --t-h1: 30pt;
   --t-display: 44pt; --t-number: 56pt;  --t-giant: 120pt;
 
+  /* Layout DNA. A theme may replace any of these — that is what makes two themes look like
+     two designs and not one design in two colours. Values here are the neutral default;
+     a theme that sets none of them gets exactly this layout. See references/themes.md. */
+  --measure: 125mm;
+  --radius-card: 1.5mm;   --radius-pill: 99px;
+  --hair: .25mm;          --rule: .5mm;           --rule-strong: .6mm;
+  --shadow-card: none;
+  --lh-display: 1.06;     --track-display: -.018em;
+  --lh-hero: 1;           --track-hero: -.028em;  --lh-giant: .82;
+  --w-text: 400;          --w-bold: 700;
+  --f-label: var(--f-text);
+  --w-label: 700;         --case-label: uppercase;
+  --track-label: .22em;   --track-th: .12em;      --track-chip: .08em;    --track-callout: .14em;
+  --marker-w: 7mm;        /* the dash before an .eyebrow; 0 removes it */
+  --stat-border: var(--rule) solid currentColor;
+  --callout-edge: 1mm solid var(--c-accent);
+  --steps-col: 14mm;
+  --quote-mark: "“";
+
   /* fallbacks: the theme replaces them */
   --c-paper: #ffffff;  --c-surface: #ffffff;  --c-ink: #161616;  --c-muted: #666666;  --c-line: #e3e3e3;
   --c-dark: #161616;   --c-light: #f2f2f2;
@@ -48,6 +67,7 @@ body {
   counter-reset: sheet;
   font-family: var(--f-text);
   font-size: var(--t-text);
+  font-weight: var(--w-text);
   line-height: 1.5;
   color: var(--c-ink);
   font-kerning: normal;
@@ -123,7 +143,7 @@ body {
 h1, h2, h3, h4 {
   margin: 0;
   font-family: var(--f-display); font-weight: var(--w-display);
-  line-height: 1.06; letter-spacing: -.018em;
+  line-height: var(--lh-display); letter-spacing: var(--track-display);
   text-wrap: balance;
 }
 h1 { font-size: var(--t-h1); }
@@ -131,31 +151,31 @@ h2 { font-size: var(--t-h2); }
 h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -.005em; }
 p  { margin: 0 0 .75em; text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
-b, strong { font-weight: 700; }
+b, strong { font-weight: var(--w-bold); }
 .accent { font-style: inherit; color: var(--c-accent-deep); }
 .sheet--dark .accent, .dark .accent { color: var(--c-accent); }
 
-.display { font-size: var(--t-display); line-height: 1; letter-spacing: -.028em; }
+.display { font-size: var(--t-display); line-height: var(--lh-hero); letter-spacing: var(--track-hero); }
 .giant   { font-family: var(--f-display); font-weight: var(--w-display);
-           font-size: var(--t-giant); line-height: .82; letter-spacing: -.05em; }
+           font-size: var(--t-giant); line-height: var(--lh-giant); letter-spacing: calc(var(--track-hero) * 1.8); }
 .lead    { font-size: var(--t-lead); line-height: 1.45; }
 .small   { font-size: var(--t-small); line-height: 1.45; }
 .muted   { color: var(--c-muted); }
 .sheet--dark .muted, .dark .muted { color: color-mix(in srgb, var(--c-light) 62%, transparent); }
-.measure { max-width: 125mm; }  /* comfortable line length */
+.measure { max-width: var(--measure); }  /* comfortable line length */
 
 .eyebrow {
   display: flex; align-items: center; gap: 2.5mm;
-  font-family: var(--f-text); font-size: var(--t-small); font-weight: 700;
-  letter-spacing: .22em; text-transform: uppercase;
+  font-family: var(--f-label); font-size: var(--t-small); font-weight: var(--w-label);
+  letter-spacing: var(--track-label); text-transform: var(--case-label);
   color: var(--c-accent-deep);
 }
-.eyebrow::before { content: ""; flex: none; width: 7mm; height: .5mm; background: currentColor; }
+.eyebrow::before { content: ""; flex: none; width: var(--marker-w); height: var(--rule); background: currentColor; }
 .eyebrow--plain::before { display: none; }
 .sheet--dark .eyebrow, .dark .eyebrow { color: var(--c-accent); }
 
-.rule     { width: 12mm; height: .6mm; border: 0; margin: 0; background: var(--c-accent); }
-.hairline { height: 0; border: 0; border-top: .25mm solid var(--c-line); margin: 0; }
+.rule     { width: 12mm; height: var(--rule-strong); border: 0; margin: 0; background: var(--c-accent); }
+.hairline { height: 0; border: 0; border-top: var(--hair) solid var(--c-line); margin: 0; }
 .sheet--dark .hairline, .dark .hairline { border-color: color-mix(in srgb, var(--c-light) 18%, transparent); }
 
 /* ------------------------------------------------------------ numbers */
@@ -165,7 +185,7 @@ b, strong { font-weight: 700; }
   font-variant-numeric: lining-nums;
   white-space: nowrap;   /* a number never breaks; print.mjs flags it if it is wider than its column */
 }
-.stat { display: flex; flex-direction: column; gap: 2.5mm; padding-top: 3.5mm; border-top: .5mm solid currentColor; }
+.stat { display: flex; flex-direction: column; gap: 2.5mm; padding-top: 3.5mm; border-top: var(--stat-border); }
 .stat .caption { font-size: var(--t-text); line-height: 1.4; color: var(--c-muted); }
 .sheet--dark .stat .caption, .dark .stat .caption { color: color-mix(in srgb, var(--c-light) 62%, transparent); }
 
@@ -173,19 +193,21 @@ b, strong { font-weight: 700; }
 .table { width: 100%; border-collapse: collapse; font-size: calc(var(--t-text) * .95); line-height: 1.4; }
 .table th {
   text-align: left; vertical-align: bottom;
-  font-size: var(--t-small); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--c-muted); padding: 0 3mm 2.5mm; border-bottom: .5mm solid var(--c-ink);
+  font-family: var(--f-label); font-size: var(--t-small); font-weight: var(--w-label);
+  letter-spacing: var(--track-th); text-transform: var(--case-label);
+  color: var(--c-muted); padding: 0 3mm 2.5mm; border-bottom: var(--rule) solid var(--c-ink);
 }
-.table td { padding: 2.8mm 3mm; border-bottom: .25mm solid var(--c-line); vertical-align: top; }
+.table td { padding: 2.8mm 3mm; border-bottom: var(--hair) solid var(--c-line); vertical-align: top; }
 .table .highlight td { background: var(--c-accent-soft); }
 .table .dim td { color: var(--c-muted); }
-.table .tabular { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 700; }
+.table .tabular { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: var(--w-bold); }
 .table--dark th { background: var(--c-dark); color: var(--c-light); padding: 2.8mm 3mm; border: 0; }
 
 .chip {
   display: inline-block; white-space: nowrap;
-  font-size: calc(var(--t-small) * .95); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  padding: .8mm 2.4mm; border-radius: 99px; background: var(--c-line);
+  font-family: var(--f-label); font-size: calc(var(--t-small) * .95); font-weight: var(--w-label);
+  letter-spacing: var(--track-chip); text-transform: var(--case-label);
+  padding: .8mm 2.4mm; border-radius: var(--radius-pill); background: var(--c-line);
 }
 .chip--good   { background: var(--c-good-soft); color: var(--c-good); }
 .chip--bad    { background: var(--c-bad-soft);  color: var(--c-bad); }
@@ -193,14 +215,15 @@ b, strong { font-weight: 700; }
 
 /* ------------------------------------------------------------ callouts */
 .callout {
-  padding: 4.5mm 5mm; border-radius: 1.5mm;
-  background: var(--c-accent-soft); border-left: 1mm solid var(--c-accent);
+  padding: 4.5mm 5mm; border-radius: var(--radius-card); box-shadow: var(--shadow-card);
+  background: var(--c-accent-soft); border-left: var(--callout-edge);
 }
 .callout--bad  { background: var(--c-bad-soft);  border-color: var(--c-bad); }
 .callout--good { background: var(--c-good-soft); border-color: var(--c-good); }
 .callout-title {
   display: block; margin-bottom: 1.5mm;
-  font-size: var(--t-small); font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  font-family: var(--f-label); font-size: var(--t-small); font-weight: 800;
+  letter-spacing: var(--track-callout); text-transform: var(--case-label);
   color: var(--c-accent-deep);
 }
 .callout--bad .callout-title  { color: var(--c-bad); }
@@ -211,27 +234,27 @@ b, strong { font-weight: 700; }
 .list > li { position: relative; padding-left: 6mm; }
 .list > li::before {
   content: ""; position: absolute; left: 0; top: .62em;
-  width: 3mm; height: .5mm; background: var(--c-accent);
+  width: 3mm; height: var(--rule); background: var(--c-accent);
 }
 
 .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; }
 .steps > li {
   counter-increment: step;
-  display: grid; grid-template-columns: 14mm 1fr; column-gap: 4mm;
-  padding: 3.5mm 0; border-top: .25mm solid var(--c-line);
+  display: grid; grid-template-columns: var(--steps-col) 1fr; column-gap: 4mm;
+  padding: 3.5mm 0; border-top: var(--hair) solid var(--c-line);
 }
-.steps > li:last-child { border-bottom: .25mm solid var(--c-line); }
+.steps > li:last-child { border-bottom: var(--hair) solid var(--c-line); }
 .steps > li::before {
   content: counter(step, decimal-leading-zero);
   font-family: var(--f-display); font-weight: var(--w-display);
   font-size: var(--t-h2); line-height: 1; color: var(--c-accent-deep);
 }
-.step-title { display: block; font-weight: 700; margin-bottom: 1mm; }
+.step-title { display: block; font-weight: var(--w-bold); margin-bottom: 1mm; }
 .step-text  { display: block; color: var(--c-muted); }
 .steps--row { flex-direction: row; gap: var(--gap); }
 .steps--row > li {
   flex: 1 1 0; grid-template-columns: 1fr; row-gap: 3mm; align-content: start;
-  border-top: .6mm solid var(--c-accent); border-bottom: 0 !important;
+  border-top: var(--rule-strong) solid var(--c-accent); border-bottom: 0 !important;
 }
 
 /* ------------------------------------------------------------ special pieces */
@@ -239,11 +262,12 @@ b, strong { font-weight: 700; }
   margin: 0; font-family: var(--f-display); font-weight: var(--w-display);
   font-size: var(--t-display); line-height: 1.08; letter-spacing: -.02em; text-wrap: balance;
 }
-.quote::before { content: "“"; display: block; font-size: 2em; line-height: .55; color: var(--c-accent); }
+.quote::before { content: var(--quote-mark); display: block; font-size: 2em; line-height: .55; color: var(--c-accent); }
 
 .copy-box {
-  border: .25mm solid var(--c-line); border-left: 1mm solid var(--c-accent);
-  border-radius: 1.5mm; padding: 5mm 6mm; background: var(--c-surface);
+  border: var(--hair) solid var(--c-line); border-left: var(--callout-edge);
+  border-radius: var(--radius-card); box-shadow: var(--shadow-card);
+  padding: 5mm 6mm; background: var(--c-surface);
   font-size: calc(var(--t-text) * .92); line-height: 1.5;
 }
 .copy-text { white-space: pre-wrap; }

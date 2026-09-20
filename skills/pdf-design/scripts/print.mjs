@@ -40,9 +40,10 @@ const INPUT = args.find(a => !a.startsWith('--'));
 const opt = (n, d) => { const a = args.find(x => x.startsWith(`--${n}=`)); return a ? a.split('=')[1] : d; };
 const NO_PNG = args.includes('--no-png');
 const SCALE = Number(opt('scale', '1'));
+const THEME_OPT = opt('theme', null);   // print this same document with another theme
 
 if (!INPUT || !existsSync(INPUT)) {
-  console.error('Usage: node print.mjs <document.html> [--no-png] [--scale=1]');
+  console.error('Usage: node print.mjs <document.html> [--theme=<name>] [--no-png] [--scale=1]');
   process.exit(1);
 }
 const SKILL_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -50,7 +51,8 @@ const ASSETS = join(SKILL_DIR, 'assets');
 const THEMES = join(ASSETS, 'themes');
 const HTML_IN = resolve(INPUT);
 const BASE = dirname(HTML_IN);
-const NAME = basename(HTML_IN, extname(HTML_IN));
+// With --theme the outputs carry the theme name, so six themes of one document do not overwrite each other.
+const NAME = basename(HTML_IN, extname(HTML_IN)) + (THEME_OPT ? `-${THEME_OPT}` : '');
 const PDF_OUT = join(BASE, `${NAME}.pdf`);
 const REVIEW = join(BASE, `${NAME}-review`);
 rmSync(REVIEW, { recursive: true, force: true });   // no stale PNGs from an older version
@@ -135,7 +137,11 @@ html = html.replace(/\sstyle=(["'])([\s\S]*?)\1/gi, (t, q, css) =>
   css.includes('url(') ? ` style=${q}${inlineCss(css, BASE)}${q}` : t);
 
 // base.css + theme, first thing in <head>, so the document's own <style> can override them.
-const themeName = html.match(/<body\b[^>]*\bdata-theme=["']([^"']+)["']/i)?.[1] || 'editorial';
+const themeName = THEME_OPT || html.match(/<body\b[^>]*\bdata-theme=["']([^"']+)["']/i)?.[1] || 'product';
+// A theme now carries layout inside a body[data-theme] block, so <body> must always hold the attribute.
+html = /<body\b[^>]*\bdata-theme=/i.test(html)
+  ? html.replace(/(<body\b[^>]*\bdata-theme=)["'][^"']*["']/i, `$1"${themeName}"`)
+  : html.replace(/<body\b/i, `<body data-theme="${themeName}"`);
 const themePath = /^[\w-]+$/.test(themeName) ? join(THEMES, `${themeName}.css`) : localPath(themeName, BASE);
 const builtIn = readdirSync(THEMES).filter(f => f.endsWith('.css')).map(f => f.slice(0, -4)).join(', ');
 if (!themePath || !existsSync(themePath)) {

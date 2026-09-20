@@ -20,7 +20,7 @@ Paths are relative to the folder that contains this `SKILL.md`.
 | `references/page-types.md` | Catalogue of sheet layouts and components, with HTML. |
 | `references/themes.md` | The six themes, and how to turn a brand you already have into one. **Read before choosing a theme.** |
 | `assets/base.css` | The sheet engine and components. Never edited per document. |
-| `assets/themes/*.css` | `editorial` (default), `warm`, `dark`, `corporate`, `mono`, `press`. Colours and fonts only. |
+| `assets/themes/*.css` | `poster`, `gallery`, `ledger`, `archive`, `product`, `stage`. Each one carries colour, type **and** layout. |
 | `scripts/print.mjs` | HTML → PDF, quality check and one PNG per sheet. |
 | `scripts/brand.mjs` | A DESIGN.md, tokens.json, CSS, HTML page or URL → a theme, a contrast audit and a preview sheet. |
 | `scripts/fonts.mjs` | Downloads a Google Font for a new theme. |
@@ -37,9 +37,9 @@ Take what the conversation already says; ask only what is missing:
 
 | Their answer | What you do |
 |---|---|
-| "No, pick one" | A built-in theme: `editorial`, `warm`, `dark`, `corporate`, `mono` or `press`. Table of voices in `references/themes.md`. |
+| "No, pick one" | A built-in theme: `poster`, `gallery`, `ledger`, `archive`, `product` or `stage`. Table of voices in `references/themes.md`. |
 | "Yes — here it is" | They give you a `DESIGN.md`, a `tokens.json`, a brand CSS, a web page or a URL. Run `node scripts/brand.mjs <source> --name <slug> -o <doc-folder>/<slug>.css --fonts`. |
-| "Yes, but it is in my head" | Ask for paper colour, ink colour, one accent and the two typefaces. Copy `assets/themes/editorial.css` next to the document and fill it in. |
+| "Yes, but it is in my head" | Ask for paper colour, ink colour, one accent and the two typefaces. Copy the built-in theme closest to it next to the document and change the values. |
 
 After `brand.mjs`, **print its preview sheet and look at it** before building the real document:
 `node scripts/print.mjs <slug>-preview.html`. Read its report: it says which value it guessed and
@@ -57,7 +57,8 @@ which it had to move for contrast. Fix anything wrong by hand, then `node script
 
 ### 3. Build
 - Put the document where the user works: `<project>/documents/<name>.html`.
-- `<body class="format-a4" data-theme="warm">` — formats: `format-a4`, `format-a4-landscape`, `format-16-9`. Themes: one of the six built-in names, or a path relative to the document (`data-theme="./brand.css"`).
+- `<body class="format-a4" data-theme="archive">` — formats: `format-a4`, `format-a4-landscape`, `format-16-9`. Themes: one of the six built-in names, or a path relative to the document (`data-theme="./brand.css"`).
+- A theme sets the margins and the type scale, so **do not override `--t-*` or font sizes in the document** unless you mean to fight it. Themes differ a lot in density: pick one that matches how much the document has to say.
 - No `<link>` to the skill is needed: `print.mjs` injects `base.css` and the theme. The document's own `<style>` goes in `<head>` and uses the theme variables (`--c-*`, `--f-*`).
 - One `<section class="sheet">` per page, with `head` · `content` · `foot`. Layouts in `page-types.md`.
 - Logos: `<!-- include: logo.svg -->` pastes an SVG sprite at print time.
@@ -68,6 +69,9 @@ which it had to move for contrast. Fix anything wrong by hand, then `node script
 ```
 node <this-skill-folder>/scripts/print.mjs <document.html>
 ```
+
+Add `--theme=<name>` to print the same file with another theme without editing it. The PDF and the
+review folder then carry the theme name, so several themes of one document do not overwrite each other.
 
 - `[ERROR]` → do not deliver. Fix and print again.
 - `[WARN]` → fix it, or justify it (for example `data-airy` on a cover).

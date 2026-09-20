@@ -11,13 +11,14 @@ Pídele a Claude, o a cualquier agente de IA, «un informe bonito en PDF» y cas
 - **Cada hoja se diseña entera.** Fondos a sangre, portadas, separadores y cierre. A4, A4 apaisado o 16:9.
 - **Texto de verdad.** Vectorial y seleccionable, con las fuentes incrustadas. Nada de capturas pegadas en un PDF.
 - **Se revisa sola.** Un script mide cada hoja (contenido cortado, texto encima del pie, hojas medio vacías, fuentes que faltan) y saca un PNG de cada una para que el agente la mire antes de entregar.
-- **Temas.** Seis incluidos: `editorial`, `warm`, `dark`, `corporate`, `mono` y `press`. ¿Ya tienes marca? Apunta `brand.mjs` a tu `DESIGN.md`, a tus tokens de diseño, a un CSS o a tu web y te escribe el tema.
+- **Temas.** Seis incluidos: `poster`, `gallery`, `ledger`, `archive`, `product` y `stage` — y cada uno es un diseño entero, no una paleta: sus propios márgenes, escala tipográfica, esquinas, filetes y adorno. ¿Ya tienes marca? Apunta `brand.mjs` a tu `DESIGN.md`, a tus tokens de diseño, a un CSS o a tu web y te escribe el tema.
 - **Nada que compilar.** Sin npm install. Node 22+ y el Chrome que ya tienes.
 
 ## Ejemplos
 
-- [Informe A4 para un cliente, tema `warm` (PDF)](examples/report-a4.pdf) · [código](examples/report-a4.html)
-- [Propuesta 16:9, tema `dark` (PDF)](examples/deck-16-9.pdf) · [código](examples/deck-16-9.html)
+- [Informe A4 para un cliente, tema `product` (PDF)](examples/report-a4.pdf) · [código](examples/report-a4.html)
+- [Propuesta 16:9, tema `stage` (PDF)](examples/deck-16-9.pdf) · [código](examples/deck-16-9.html)
+- [Las mismas tres páginas en los seis temas](examples/themes/) · [código](examples/themes/showcase.html)
 - [El «antes»: el mismo informe impreso como siempre (PDF)](examples/before/report-web-style.pdf)
 
 ## Instalar
@@ -37,7 +38,7 @@ O pega esto en tu agente: *«Instala la skill de github.com/Georgi45/pdf-design�
 
 Pide el documento y ya:
 
-> Hazme un informe en PDF de los números del trimestre para el cliente. A4, tema warm.
+> Hazme un informe en PDF de los números del trimestre para el cliente. A4, tema product.
 
 > Convierte esta propuesta en un PDF 16:9.
 
@@ -85,7 +86,7 @@ Lee lo que imprime: te dice de qué token salió cada color y qué valores tuvo 
 texto se lea. Es un primer borrador que tú corriges, no un veredicto. Puedes auditar cualquier tema
 con `node skills/pdf-design/scripts/brand.mjs --check ./acme.css`.
 
-¿Prefieres escribirlo tú? Copia `skills/pdf-design/assets/themes/editorial.css` junto a tu documento
+¿Prefieres escribirlo tú? Copia el de `skills/pdf-design/assets/themes/*.css` que más se parezca, junto a tu documento
 y cambia los valores. Descarga cualquier fuente de Google Fonts con:
 
 ```

@@ -11,13 +11,14 @@ Ask Claude — or any AI agent — for "a nice PDF report" and you usually get a
 - **Every page designed as a whole.** Full-bleed backgrounds, covers, dividers and closing pages. A4, A4 landscape or 16:9.
 - **Real text.** Vector and selectable, fonts embedded. No screenshots glued into a PDF.
 - **It reviews itself.** A print script measures every page — content cut off, text over the footer, half-empty pages, missing fonts — and renders a PNG of each sheet for the agent to look at before delivering.
-- **Themes.** Six built in: `editorial`, `warm`, `dark`, `corporate`, `mono` and `press`. Already have a brand? Point `brand.mjs` at your `DESIGN.md`, your design tokens, a CSS file or your live site and it writes the theme for you.
+- **Themes.** Six built in: `poster`, `gallery`, `ledger`, `archive`, `product` and `stage` — and each one is a whole design, not a palette: its own margins, type scale, corners, rules and ornament. Already have a brand? Point `brand.mjs` at your `DESIGN.md`, your design tokens, a CSS file or your live site and it writes the theme for you.
 - **Nothing to build.** No npm install. Node 22+ and the Chrome you already have.
 
 ## See it
 
-- [A4 client report, `warm` theme (PDF)](examples/report-a4.pdf) · [source](examples/report-a4.html)
-- [16:9 proposal deck, `dark` theme (PDF)](examples/deck-16-9.pdf) · [source](examples/deck-16-9.html)
+- [A4 client report, `product` theme (PDF)](examples/report-a4.pdf) · [source](examples/report-a4.html)
+- [16:9 proposal deck, `stage` theme (PDF)](examples/deck-16-9.pdf) · [source](examples/deck-16-9.html)
+- [The same three pages in all six themes](examples/themes/) · [source](examples/themes/showcase.html)
 - [The "before": the same report, printed the usual way (PDF)](examples/before/report-web-style.pdf)
 
 ## Install
@@ -37,7 +38,7 @@ Or paste this into your agent: *"Install the skill from github.com/Georgi45/pdf-
 
 Just ask for the document:
 
-> Make a PDF report of our Q3 numbers for the client. A4, warm theme.
+> Make a PDF report of our Q3 numbers for the client. A4, product theme.
 
 > Turn this proposal into a 16:9 PDF deck.
 
@@ -55,7 +56,7 @@ node skills/pdf-design/scripts/print.mjs my-report.html
 ```
 
 ```
-PDF:     my-report.pdf  (6 pages, 467 KB, 210 × 297 mm, theme: warm)
+PDF:     my-report.pdf  (6 pages, 467 KB, 210 × 297 mm, theme: product)
 Fonts:   Fraunces-72pt-SemiBold, Instrument-Sans, Instrument-Sans-Bold
 Review:  my-report-review/sheet-01.png …
 [WARN]  Sheet 3: empty gap of 34 % (82 mm). Spread the content, scale it up or merge with another sheet.
@@ -92,7 +93,7 @@ Read what it prints. It says which colour came from which token and which values
 text readable — a first draft you correct, not a verdict. Audit any theme at any time with
 `node skills/pdf-design/scripts/brand.mjs --check ./acme.css`.
 
-Prefer to write it yourself? Copy `skills/pdf-design/assets/themes/editorial.css` next to your
+Prefer to write it yourself? Copy whichever of `skills/pdf-design/assets/themes/*.css` is closest, next to your
 document and change the values. Download any Google Font into the skill with:
 
 ```
